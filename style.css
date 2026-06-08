@@ -136,3 +136,93 @@ footer{
     font-size:18px;
     color:#666;
 }
+
+body{
+    margin:0;
+    font-family:'Noto Sans KR', sans-serif;
+    background:#f5f9fc;
+}
+
+.hero{
+    background-image:
+    linear-gradient(
+      rgba(0,0,0,0.3),
+      rgba(0,0,0,0.3)
+    ),
+    url("images/clinic.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+    text-align: center;
+
+    padding: 120px 20px;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:20px;
+}
+
+section{
+    background:white;
+
+    margin:30px auto;
+    padding:30px;
+
+    max-width:1000px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 3px 15px rgba(0,0,0,0.08);
+}
+
+h2{
+    color:#2d7fb8;
+}
+
+button{
+    background:#2d7fb8;
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+input,
+textarea{
+    width:100%;
+
+    padding:12px;
+
+    margin:8px 0;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
