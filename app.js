@@ -250,19 +250,19 @@ async function loadReviews() {
     const data = reviewDoc.data();
 
     reviewList.innerHTML += `
-      <div>
-        <strong>${data.writer}</strong>
-        <p>${data.content}</p>
+  <div>
+    <strong>${data.writer}</strong>
+    <p>${data.content}</p>
 
-        ${auth.currentUser ? `
-        <button onclick="deleteReview('${reviewDoc.id}')">
-          삭제
-        </button>
-        ` : ""}
+    ${auth.currentUser ? `
+    <button onclick="deleteReview('${reviewDoc.id}')">
+      삭제
+    </button>
+    ` : ""}
 
-        <hr>
-      </div>
-    `;
+    <hr>
+  </div>
+`;
 
   });
 
