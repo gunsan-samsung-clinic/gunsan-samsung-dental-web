@@ -91,7 +91,7 @@ async function loadEvents() {
 
     const data = eventDoc.data();
 
-    eventList.innerHTML += `
+    reviewList.innerHTML += `
       <div>
         <h4>${data.title}</h4>
         <p>${data.content}</p>
@@ -249,14 +249,16 @@ async function loadReviews() {
 
     const data = reviewDoc.data();
 
-    eventList.innerHTML +=
+    reviewList.innerHTML += `
       <div>
         <strong>${data.writer}</strong>
         <p>${data.content}</p>
 
+        ${auth.currentUser ? `
         <button onclick="deleteReview('${reviewDoc.id}')">
           삭제
         </button>
+        ` : ""}
 
         <hr>
       </div>
@@ -265,7 +267,6 @@ async function loadReviews() {
   });
 
 }
-
 loadReviews();
 
 /* =========================
@@ -419,6 +420,13 @@ onAuthStateChanged(
 
 window.deleteReview = async function(id) {
 
+if (!auth.currentUser) {
+
+  alert("관리자만 삭제 가능합니다.");
+  return;
+
+}
+  
   const ok =
     confirm("정말 삭제하시겠습니까?");
 
