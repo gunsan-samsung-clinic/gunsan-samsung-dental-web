@@ -415,6 +415,9 @@ onAuthStateChanged(
 
     }
 
+    loadReviews();
+    loadMemos();
+
   }
 );
 
