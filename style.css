@@ -233,7 +233,7 @@ td{
 
 @media (max-width: 768px) {
 
-  .container {
+  .memo-list {
     flex-direction: column;
     gap: 10px;
   }
