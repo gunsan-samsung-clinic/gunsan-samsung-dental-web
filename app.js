@@ -87,24 +87,19 @@ async function loadEvents() {
   const querySnapshot =
     await getDocs(collection(db, "events"));
 
- querySnapshot.forEach((reviewDoc) => {
+  querySnapshot.forEach((eventDoc) => {
 
-  const data = reviewDoc.data();
+    const data = eventDoc.data();
 
-  reviewList.innerHTML += `
-    <div>
-      <strong>${data.writer}</strong>
-      <p>${data.content}</p>
+    eventList.innerHTML += `
+      <div>
+        <h4>${data.title}</h4>
+        <p>${data.content}</p>
+        <hr>
+      </div>
+    `;
 
-      <button onclick="deleteReview('${reviewDoc.id}')">
-        삭제
-      </button>
-
-      <hr>
-    </div>
-  `;
-
-});
+  });
 
 }
 
@@ -171,24 +166,19 @@ async function loadNews() {
   const querySnapshot =
     await getDocs(collection(db, "news"));
 
-  querySnapshot.forEach((reviewDoc) => {
+  querySnapshot.forEach((newsDoc) => {
 
-  const data = reviewDoc.data();
+    const data = newsDoc.data();
 
-  reviewList.innerHTML += `
-    <div>
-      <strong>${data.writer}</strong>
-      <p>${data.content}</p>
+    newsList.innerHTML += `
+      <div>
+        <h4>${data.title}</h4>
+        <p>${data.content}</p>
+        <hr>
+      </div>
+    `;
 
-      <button onclick="deleteReview('${reviewDoc.id}')">
-        삭제
-      </button>
-
-      <hr>
-    </div>
-  `;
-
-});
+  });
 
 }
 
@@ -257,22 +247,23 @@ async function loadReviews() {
 
   querySnapshot.forEach((reviewDoc) => {
 
-  const data = reviewDoc.data();
+    const data = reviewDoc.data();
 
-  reviewList.innerHTML += `
-    <div>
-      <strong>${data.writer}</strong>
-      <p>${data.content}</p>
+    reviewList.innerHTML += `
+      <div>
+        <strong>${data.writer}</strong>
+        <p>${data.content}</p>
 
-      <button onclick="deleteReview('${reviewDoc.id}')">
-        삭제
-      </button>
+        <button onclick="deleteReview('${reviewDoc.id}')">
+          삭제
+        </button>
 
-      <hr>
-    </div>
-  `;
+        <hr>
+      </div>
+    `;
 
-});
+  });
+
 }
 
 loadReviews();
@@ -338,29 +329,23 @@ async function loadMemos() {
   const querySnapshot =
     await getDocs(collection(db, "memos"));
 
-  querySnapshot.forEach((reviewDoc) => {
+  querySnapshot.forEach((memoDoc) => {
 
-  const data = reviewDoc.data();
+    const data = memoDoc.data();
 
-  reviewList.innerHTML += `
-    <div>
-      <strong>${data.writer}</strong>
-      <p>${data.content}</p>
+    memoList.innerHTML += `
+      <div>
+        <strong>${data.writer}</strong>
+        <p>${data.memo}</p>
+        <hr>
+      </div>
+    `;
 
-      <button onclick="deleteReview('${reviewDoc.id}')">
-        삭제
-      </button>
-
-      <hr>
-    </div>
-  `;
-
-});
+  });
 
 }
 
 loadMemos();
-
 /* =========================
    로그인
 ========================= */
