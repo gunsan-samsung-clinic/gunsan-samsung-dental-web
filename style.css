@@ -149,14 +149,12 @@ body{
       rgba(0,0,0,0.3),
       rgba(0,0,0,0.3)
     ),
-    url("images/clinic.png");
+    url("imagesclinic.png");
 
     background-size: cover;
     background-position: center;
-
     color: white;
     text-align: center;
-
     padding: 120px 20px;
 }
 
