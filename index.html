@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>군산삼성치과</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>군산삼성치과</h1>
+</header>
+
+<nav>
+    <button>병원소개</button>
+    <button>이벤트</button>
+    <button>병원소식</button>
+    <button>환자후기</button>
+    <button>메모</button>
+    <button>관리자</button>
+</nav>
+
+<section id="loginSection">
+
+    <h2>관리자 로그인</h2>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="이메일">
+
+    <br><br>
+
+    <input
+        type="password"
+        id="password"
+        placeholder="비밀번호">
+
+    <br><br>
+
+    <button id="loginBtn">
+        로그인
+    </button>
+
+    <button id="logoutBtn">
+        로그아웃
+    </button>
+
+</section>
+
+<main>
+
+<section id="eventAdmin">
+    <h2>이벤트 등록</h2>
+
+    <input
+        type="text"
+        id="eventTitle"
+        placeholder="이벤트 제목">
+
+    <br><br>
+
+    <textarea
+        id="eventContent"
+        placeholder="이벤트 내용"></textarea>
+
+    <br><br>
+
+    <button id="saveEvent">
+        이벤트 저장
+    </button>
+
+    <h3>이벤트 목록</h3>
+
+    <div id="eventList"></div>
+
+</section>
+
+<section id="newsAdmin">
+    <h2>병원소식</h2>
+
+    <input
+        type="text"
+        id="newsTitle"
+        placeholder="소식 제목">
+
+    <br><br>
+
+    <textarea
+        id="newsContent"
+        placeholder="소식 내용"></textarea>
+
+    <br><br>
+
+    <button id="saveNews">
+        소식 저장
+    </button>
+
+    <h3>소식 목록</h3>
+
+    <div id="newsList"></div>
+</section>
+
+<section>
+    <h2>환자후기</h2>
+
+    <input
+        type="text"
+        id="reviewWriter"
+        placeholder="작성자">
+
+    <br><br>
+
+    <textarea
+        id="reviewText"
+        placeholder="후기를 입력하세요"></textarea>
+
+    <br><br>
+
+    <button id="reviewBtn">
+        후기 등록
+    </button>
+
+    <h3>후기 목록</h3>
+
+    <div id="reviewList"></div>
+</section>
+
+<section>
+    <h2>환자 메모</h2>
+
+    <input
+        type="text"
+        id="memoWriter"
+        placeholder="작성자">
+
+    <br><br>
+
+    <textarea
+        id="memoText"
+        placeholder="메모를 입력하세요"></textarea>
+
+    <br><br>
+
+    <button id="memoBtn">
+        메모 등록
+    </button>
+
+    <h3>메모 목록</h3>
+
+    <div id="memoList"></div>
+
+</section>
+
+</main>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
