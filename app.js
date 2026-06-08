@@ -335,12 +335,19 @@ async function loadMemos() {
     const data = memoDoc.data();
 
     memoList.innerHTML += `
-      <div>
-        <strong>${data.writer}</strong>
-        <p>${data.memo}</p>
-        <hr>
-      </div>
-    `;
+  <div>
+    <strong>${data.writer}</strong>
+    <p>${data.memo}</p>
+
+    ${auth.currentUser ? `
+    <button onclick="deleteMemo('${memoDoc.id}')">
+      삭제
+    </button>
+    ` : ""}
+
+    <hr>
+  </div>
+`;
 
   });
 
@@ -452,4 +459,37 @@ if (!auth.currentUser) {
   }
 
 };
+
+window.deleteMemo = async function(id) {
+
+  if (!auth.currentUser) {
+
+    alert("관리자만 삭제 가능합니다.");
+    return;
+
+  }
+
+  const ok =
+    confirm("정말 삭제하시겠습니까?");
+
+  if (!ok) return;
+
+  try {
+
+    await deleteDoc(
+      doc(db, "memos", id)
+    );
+
+    alert("삭제 완료");
+
+    loadMemos();
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+};
+
 
