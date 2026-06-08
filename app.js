@@ -91,7 +91,7 @@ async function loadEvents() {
 
     const data = eventDoc.data();
 
-    reviewList.innerHTML += `
+    eventList.innerHTML += `
       <div>
         <h4>${data.title}</h4>
         <p>${data.content}</p>
