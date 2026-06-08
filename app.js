@@ -3,7 +3,9 @@ import { db, auth } from "./firebase.js";
 import {
   collection,
   addDoc,
-  getDocs
+  getDocs,
+  deleteDoc,
+  doc
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 import {
@@ -85,19 +87,24 @@ async function loadEvents() {
   const querySnapshot =
     await getDocs(collection(db, "events"));
 
-  querySnapshot.forEach((doc) => {
+ querySnapshot.forEach((reviewDoc) => {
 
-    const data = doc.data();
+  const data = reviewDoc.data();
 
-    eventList.innerHTML += `
-      <div>
-        <h4>${data.title}</h4>
-        <p>${data.content}</p>
-        <hr>
-      </div>
-    `;
+  reviewList.innerHTML += `
+    <div>
+      <strong>${data.writer}</strong>
+      <p>${data.content}</p>
 
-  });
+      <button onclick="deleteReview('${reviewDoc.id}')">
+        삭제
+      </button>
+
+      <hr>
+    </div>
+  `;
+
+});
 
 }
 
@@ -164,19 +171,24 @@ async function loadNews() {
   const querySnapshot =
     await getDocs(collection(db, "news"));
 
-  querySnapshot.forEach((doc) => {
+  querySnapshot.forEach((reviewDoc) => {
 
-    const data = doc.data();
+  const data = reviewDoc.data();
 
-    newsList.innerHTML += `
-      <div>
-        <h4>${data.title}</h4>
-        <p>${data.content}</p>
-        <hr>
-      </div>
-    `;
+  reviewList.innerHTML += `
+    <div>
+      <strong>${data.writer}</strong>
+      <p>${data.content}</p>
 
-  });
+      <button onclick="deleteReview('${reviewDoc.id}')">
+        삭제
+      </button>
+
+      <hr>
+    </div>
+  `;
+
+});
 
 }
 
@@ -243,20 +255,24 @@ async function loadReviews() {
   const querySnapshot =
     await getDocs(collection(db, "reviews"));
 
-  querySnapshot.forEach((doc) => {
+  querySnapshot.forEach((reviewDoc) => {
 
-    const data = doc.data();
+  const data = reviewDoc.data();
 
-    reviewList.innerHTML += `
-      <div>
-        <strong>${data.writer}</strong>
-        <p>${data.content}</p>
-        <hr>
-      </div>
-    `;
+  reviewList.innerHTML += `
+    <div>
+      <strong>${data.writer}</strong>
+      <p>${data.content}</p>
 
-  });
+      <button onclick="deleteReview('${reviewDoc.id}')">
+        삭제
+      </button>
 
+      <hr>
+    </div>
+  `;
+
+});
 }
 
 loadReviews();
@@ -322,19 +338,24 @@ async function loadMemos() {
   const querySnapshot =
     await getDocs(collection(db, "memos"));
 
-  querySnapshot.forEach((doc) => {
+  querySnapshot.forEach((reviewDoc) => {
 
-    const data = doc.data();
+  const data = reviewDoc.data();
 
-    memoList.innerHTML += `
-      <div>
-        <strong>${data.writer}</strong>
-        <p>${data.memo}</p>
-        <hr>
-      </div>
-    `;
+  reviewList.innerHTML += `
+    <div>
+      <strong>${data.writer}</strong>
+      <p>${data.content}</p>
 
-  });
+      <button onclick="deleteReview('${reviewDoc.id}')">
+        삭제
+      </button>
+
+      <hr>
+    </div>
+  `;
+
+});
 
 }
 
@@ -410,3 +431,29 @@ onAuthStateChanged(
 
   }
 );
+
+window.deleteReview = async function(id) {
+
+  const ok =
+    confirm("정말 삭제하시겠습니까?");
+
+  if (!ok) return;
+
+  try {
+
+    await deleteDoc(
+      doc(db, "reviews", id)
+    );
+
+    alert("삭제 완료");
+
+    loadReviews();
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+};
+
