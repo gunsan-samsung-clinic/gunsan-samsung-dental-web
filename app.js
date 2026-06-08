@@ -249,7 +249,7 @@ async function loadReviews() {
 
     const data = reviewDoc.data();
 
-    reviewList.innerHTML += `
+    eventList.innerHTML +=
       <div>
         <strong>${data.writer}</strong>
         <p>${data.content}</p>
