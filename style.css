@@ -10,13 +10,6 @@ body {
   color: #2c3e50;
 }
 
-/* 전체 레이아웃 */
-.container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-}
-
 /* 헤더 */
 header {
   background: #ffffff;
@@ -108,34 +101,6 @@ h1, h2, h3 {
    📱 모바일 반응형
    ========================= */
 
-@media (max-width: 768px) {
-
-  .container {
-    flex-direction: column;
-    padding: 10px;
-    gap: 12px;
-  }
-
-  .memo-card,
-  .review-card,
-  .news-card {
-    width: 100%;
-  }
-
-  button {
-    width: 100%;
-    font-size: 13px;
-    padding: 12px;
-  }
-
-  header h1 {
-    font-size: 22px;
-  }
-
-  body {
-    font-size: 14px;
-  }
-}
 
 /* HERO */
 .hero {
@@ -156,15 +121,12 @@ h1, h2, h3 {
   color: #2c3e50;
   font-weight: bold;
   margin-top: 20px;
+  padding: 12px 20px;
+  border-radius: 12px;
+   font-size: 16px;
+  cursor: pointer;
 }
 
-/* 3컬럼 구조 */
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
 
 /* 섹션 */
 .memo-section,
@@ -189,7 +151,21 @@ footer {
     grid-template-columns: 1fr;
   }
 
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+   
   .hero h2 {
     font-size: 22px;
   }
+
+   button {
+  width: 100%;
+  font-size: 13px;
+  padding: 12px;
+}
+   
 }
