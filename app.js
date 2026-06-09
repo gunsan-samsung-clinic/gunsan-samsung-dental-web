@@ -492,7 +492,9 @@ window.deleteMemo = async function(id) {
 
 onAuthStateChanged(auth, (user) => {
 
-  console.log("현재 로그인 사용자:", user);
+  console.log("===========");
+  console.log("현재 사용자", user);
+  console.log("===========");
 
   if(user){
 
@@ -510,8 +512,5 @@ onAuthStateChanged(auth, (user) => {
   loadMemos();
 
 });
-  
-
-};
 
 
