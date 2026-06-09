@@ -10,6 +10,30 @@
 <body>
 
   <!-- ================= HEADER ================= -->
+
+<div class="card">
+
+  <h3>관리자 로그인</h3>
+
+  <input
+    id="email"
+    placeholder="이메일">
+
+  <input
+    id="password"
+    type="password"
+    placeholder="비밀번호">
+
+  <button id="loginBtn">
+    로그인
+  </button>
+
+  <button id="logoutBtn">
+    로그아웃
+  </button>
+
+</div>
+  
   <header>
     <h1>🦷 군산 삼성치과</h1>
     <p>정직한 진료 · 편안한 치료 · 신뢰받는 의료</p>
@@ -28,11 +52,7 @@
   <!-- ================= MAIN LAYOUT ================= -->
   <div class="container">
 
-    <!-- 📝 메모 / 공지 -->
-    <div class="memo-section">
-      <h3>📌 공지사항</h3>
-
-     <div class="memo-section">
+   <div class="memo-section">
 
   <h3>📌 공지사항</h3>
 
@@ -42,11 +62,11 @@
 
     <input
       id="eventTitle"
-      placeholder="제목">
+      placeholder="공지 제목">
 
     <textarea
       id="eventContent"
-      placeholder="내용"></textarea>
+      placeholder="공지 내용"></textarea>
 
     <button id="saveEvent">
       공지 등록
@@ -67,6 +87,8 @@
     <!-- 📰 뉴스 -->
    <div class="news-section">
 
+ <div class="news-section">
+
   <h3>📰 병원 소식</h3>
 
   <div id="newsList"></div>
@@ -75,11 +97,11 @@
 
     <input
       id="newsTitle"
-      placeholder="제목">
+      placeholder="소식 제목">
 
     <textarea
       id="newsContent"
-      placeholder="내용"></textarea>
+      placeholder="소식 내용"></textarea>
 
     <button id="saveNews">
       소식 등록
@@ -88,20 +110,48 @@
   </div>
 
 </div>
+
+     
     <!-- ⭐ 리뷰 -->
     <div class="review-section">
-      <h3>⭐ 환자 후기</h3>
 
-      <div class="review-card">
-        <p>“진짜 친절하고 설명 잘해주세요!”</p>
-      </div>
+  <h3>⭐ 환자 후기</h3>
 
-      <div class="review-card">
-        <p>“통증 없이 치료받아서 좋았어요”</p>
-      </div>
-    </div>
+  <input
+    id="reviewWriter"
+    placeholder="작성자">
 
-  </div>
+  <textarea
+    id="reviewText"
+    placeholder="후기 작성"></textarea>
+
+  <button id="reviewBtn">
+    후기 등록
+  </button>
+
+  <div id="reviewList"></div>
+
+</div>
+
+     <div class="memo-section">
+
+  <h3>📝 환자 메모</h3>
+
+  <input
+    id="memoWriter"
+    placeholder="작성자">
+
+  <textarea
+    id="memoText"
+    placeholder="메모 작성"></textarea>
+
+  <button id="memoBtn">
+    메모 등록
+  </button>
+
+  <div id="memoList"></div>
+
+</div>
 
   <!-- ================= FOOTER ================= -->
   <footer>
