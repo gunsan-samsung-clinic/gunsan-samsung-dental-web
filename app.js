@@ -490,6 +490,28 @@ window.deleteMemo = async function(id) {
 
   }
 
+onAuthStateChanged(auth, (user) => {
+
+  console.log("현재 로그인 사용자:", user);
+
+  if(user){
+
+    eventAdmin.style.display = "block";
+    newsAdmin.style.display = "block";
+
+  } else {
+
+    eventAdmin.style.display = "none";
+    newsAdmin.style.display = "none";
+
+  }
+
+  loadReviews();
+  loadMemos();
+
+});
+  
+
 };
 
 
