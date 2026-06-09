@@ -469,8 +469,7 @@ window.deleteMemo = async function(id) {
 
   }
 
-  const ok =
-    confirm("정말 삭제하시겠습니까?");
+  const ok = confirm("정말 삭제하시겠습니까?");
 
   if (!ok) return;
 
@@ -490,10 +489,12 @@ window.deleteMemo = async function(id) {
 
   }
 
+};
+
 onAuthStateChanged(auth, (user) => {
 
   console.log("===========");
-  console.log("현재 사용자", user);
+  console.log("현재 사용자:", user);
   console.log("===========");
 
   if(user){
@@ -512,5 +513,3 @@ onAuthStateChanged(auth, (user) => {
   loadMemos();
 
 });
-
-
