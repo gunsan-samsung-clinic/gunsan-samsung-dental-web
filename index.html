@@ -32,9 +32,29 @@
     <div class="memo-section">
       <h3>📌 공지사항</h3>
 
-      <div class="memo-card">
-        <p>✔ 6월 진료 일정 안내</p>
-      </div>
+     <div class="memo-section">
+
+  <h3>📌 공지사항</h3>
+
+  <div id="eventList"></div>
+
+  <div id="eventAdmin">
+
+    <input
+      id="eventTitle"
+      placeholder="제목">
+
+    <textarea
+      id="eventContent"
+      placeholder="내용"></textarea>
+
+    <button id="saveEvent">
+      공지 등록
+    </button>
+
+  </div>
+
+</div>
 
       <div class="memo-card">
         <p>✔ 야간 진료 시간 변경 안내</p>
@@ -45,18 +65,29 @@
     </div>
 
     <!-- 📰 뉴스 -->
-    <div class="news-section">
-      <h3>📰 병원 소식</h3>
+   <div class="news-section">
 
-      <div class="news-card">
-        <p>임플란트 이벤트 진행 중</p>
-      </div>
+  <h3>📰 병원 소식</h3>
 
-      <div class="news-card">
-        <p>신규 의료장비 도입</p>
-      </div>
-    </div>
+  <div id="newsList"></div>
 
+  <div id="newsAdmin">
+
+    <input
+      id="newsTitle"
+      placeholder="제목">
+
+    <textarea
+      id="newsContent"
+      placeholder="내용"></textarea>
+
+    <button id="saveNews">
+      소식 등록
+    </button>
+
+  </div>
+
+</div>
     <!-- ⭐ 리뷰 -->
     <div class="review-section">
       <h3>⭐ 환자 후기</h3>
