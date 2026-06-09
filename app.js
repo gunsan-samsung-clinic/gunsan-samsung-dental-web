@@ -14,7 +14,7 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-console.log("Firebase 연결 성공");
+console.log("2026-삭제테스트");
 
 const loginBtn =
 document.getElementById("loginBtn");
