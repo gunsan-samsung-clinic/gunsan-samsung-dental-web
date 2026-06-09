@@ -170,3 +170,94 @@ footer {
     padding: 12px;
   }
 }
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:80px 10%;
+  background:#eaf7ff;
+}
+
+.hero-left{
+  flex:1;
+}
+
+.hero-left h2{
+  font-size:48px;
+  margin-bottom:20px;
+}
+
+.hero-left p{
+  font-size:18px;
+  line-height:1.8;
+}
+
+.hero-right{
+  flex:1;
+  text-align:center;
+}
+
+.hero-right img{
+  width:100%;
+  max-width:500px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+/* =========================
+   병원 정보 카드
+========================= */
+
+.info-section{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  padding:40px;
+}
+
+.info-card{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.info-card h3{
+  color:#2196f3;
+}
+
+/* =========================
+   메인 컨텐츠
+========================= */
+
+.container{
+  max-width:1400px;
+  margin:auto;
+}
+
+/* =========================
+   모바일
+========================= */
+
+@media(max-width:768px){
+
+  .hero{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero-left h2{
+    font-size:32px;
+  }
+
+  .info-section{
+    grid-template-columns:1fr;
+  }
+
+}
