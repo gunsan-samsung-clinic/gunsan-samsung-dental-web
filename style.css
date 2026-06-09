@@ -97,6 +97,13 @@ h1, h2, h3 {
   font-weight: bold;
 }
 
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
 /* =========================
    📱 모바일 반응형
    ========================= */
@@ -150,13 +157,6 @@ footer {
   .container {
     grid-template-columns: 1fr;
   }
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
    
   .hero h2 {
     font-size: 22px;
