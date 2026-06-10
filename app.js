@@ -31,6 +31,34 @@ document.getElementById("newsAdmin");
 eventAdmin.style.display = "none";
 newsAdmin.style.display = "none";
 
+const adminBtn =
+document.getElementById("adminBtn");
+
+const adminLogin =
+document.querySelector(".admin-login");
+
+if(adminLogin){
+  adminLogin.style.display = "none";
+}
+
+if(adminBtn){
+
+  adminBtn.addEventListener("click", () => {
+
+    if(adminLogin.style.display === "none"){
+
+      adminLogin.style.display = "block";
+
+    } else {
+
+      adminLogin.style.display = "none";
+
+    }
+
+  });
+
+}
+
 /* =========================
    이벤트 저장
 ========================= */
