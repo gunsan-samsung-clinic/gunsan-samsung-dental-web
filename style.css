@@ -25,6 +25,7 @@ header{
 nav{
   display:flex;
   gap:20px;
+  flex-wrap:wrap;
 }
 
 nav a{
@@ -36,7 +37,6 @@ nav a{
 nav a:hover{
   color:#29b6f6;
 }
-
 /* HERO */
 .hero{
   display:flex;
