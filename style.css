@@ -186,6 +186,10 @@ footer{
   grid-template-columns:1fr;
 }
 
+  .hero-right img{
+  margin-top:20px;
+}
+
 }
 
 /* 진료과목 */
@@ -219,4 +223,7 @@ footer{
   transform:translateY(-5px);
 }
 
-
+.hero-right img{
+  width:100%;
+  max-width:500px;
+}
