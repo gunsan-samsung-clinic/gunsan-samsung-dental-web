@@ -380,11 +380,11 @@ async () => {
 
   } catch(err) {
 
-    alert("로그인 실패");
+  alert(err.message);
 
-    console.error(err);
+  console.error(err);
 
-  }
+}
 
 });
 
