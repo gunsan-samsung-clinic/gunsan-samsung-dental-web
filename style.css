@@ -182,4 +182,41 @@ footer{
     grid-template-columns:1fr;
   }
 
+  .treatment-grid{
+  grid-template-columns:1fr;
 }
+
+}
+
+/* 진료과목 */
+
+.treatment-section{
+  padding:50px 30px;
+  text-align:center;
+}
+
+.treatment-section h2{
+  margin-bottom:30px;
+}
+
+.treatment-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.treatment-card{
+  background:white;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+  font-size:20px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.treatment-card:hover{
+  transform:translateY(-5px);
+}
+
+
