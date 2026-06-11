@@ -438,27 +438,7 @@ async () => {
    로그인 상태
 ========================= */
 
-onAuthStateChanged(
-  auth,
-  (user) => {
 
-    if(user){
-
-      eventAdmin.style.display = "block";
-      newsAdmin.style.display = "block";
-
-    } else {
-
-      eventAdmin.style.display = "none";
-      newsAdmin.style.display = "none";
-
-    }
-
-    loadReviews();
-    loadMemos();
-
-  }
-);
 
 window.deleteReview = async function(id) {
 
@@ -534,10 +514,18 @@ onAuthStateChanged(auth, (user) => {
     eventAdmin.style.display = "block";
     newsAdmin.style.display = "block";
 
+    if(adminBtn){
+      adminBtn.textContent = "관리자 로그인됨";
+    }
+
   } else {
 
     eventAdmin.style.display = "none";
     newsAdmin.style.display = "none";
+
+    if(adminBtn){
+      adminBtn.textContent = "관리자";
+    }
 
   }
 
