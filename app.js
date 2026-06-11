@@ -406,6 +406,10 @@ async () => {
 
     alert("로그인 성공");
 
+if(adminLogin){
+  adminLogin.style.display = "none";
+}
+    
   } catch(err) {
 
   alert(err.message);
