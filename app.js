@@ -263,6 +263,8 @@ if (reviewBtn) {
 
 async function loadReviews() {
 
+console.log("후기 불러오기 실행");
+  
   const reviewList =
     document.getElementById("reviewList");
 
@@ -349,6 +351,8 @@ if (memoBtn) {
 
 async function loadMemos() {
 
+console.log("메모 불러오기 실행");
+  
   const memoList =
     document.getElementById("memoList");
 
