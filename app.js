@@ -270,7 +270,7 @@ async function loadReviews() {
 
   reviewList.innerHTML = "";
 
-const isAdmin = auth.currentUser !== null;
+const isAdmin = auth.currentUser;
   
   const querySnapshot =
     await getDocs(collection(db, "reviews"));
@@ -297,7 +297,6 @@ const isAdmin = auth.currentUser !== null;
   });
 
 }
-loadReviews();
 
 /* =========================
    환자 메모 저장
@@ -357,7 +356,7 @@ async function loadMemos() {
 
   memoList.innerHTML = "";
 
-const isAdmin = auth.currentUser !== null;
+const isAdmin = auth.currentUser;
   
   const querySnapshot =
     await getDocs(collection(db, "memos"));
@@ -371,7 +370,7 @@ const isAdmin = auth.currentUser !== null;
     <strong>${data.writer}</strong>
     <p>${data.memo}</p>
 
-    $${isAdmin ? `
+    ${isAdmin ? `
     <button onclick="deleteMemo('${memoDoc.id}')">
       삭제
     </button>
@@ -385,7 +384,6 @@ const isAdmin = auth.currentUser !== null;
 
 }
 
-loadMemos();
 /* =========================
    로그인
 ========================= */
