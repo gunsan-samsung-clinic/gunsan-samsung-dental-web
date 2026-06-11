@@ -270,6 +270,8 @@ async function loadReviews() {
 
   reviewList.innerHTML = "";
 
+const isAdmin = auth.currentUser !== null;
+  
   const querySnapshot =
     await getDocs(collection(db, "reviews"));
 
@@ -282,7 +284,7 @@ async function loadReviews() {
     <strong>${data.writer}</strong>
     <p>${data.content}</p>
 
-    ${auth.currentUser ? `
+    ${isAdmin ? `
     <button onclick="deleteReview('${reviewDoc.id}')">
       삭제
     </button>
@@ -355,6 +357,8 @@ async function loadMemos() {
 
   memoList.innerHTML = "";
 
+const isAdmin = auth.currentUser !== null;
+  
   const querySnapshot =
     await getDocs(collection(db, "memos"));
 
@@ -367,7 +371,7 @@ async function loadMemos() {
     <strong>${data.writer}</strong>
     <p>${data.memo}</p>
 
-    ${auth.currentUser ? `
+    $${isAdmin ? `
     <button onclick="deleteMemo('${memoDoc.id}')">
       삭제
     </button>
