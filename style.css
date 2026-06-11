@@ -336,3 +336,83 @@ footer{
 
 
 }
+
+/* =========================
+   병원 갤러리
+========================= */
+
+
+.gallery-section{
+
+  padding:60px 40px;
+  text-align:center;
+
+}
+
+
+.gallery-section h2{
+
+  font-size:32px;
+  margin-bottom:15px;
+
+}
+
+
+.gallery-section p{
+
+  color:#777;
+  margin-bottom:30px;
+
+}
+
+
+.gallery-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,1fr);
+
+  gap:25px;
+
+  max-width:1000px;
+
+  margin:auto;
+
+}
+
+
+
+.gallery-grid img{
+
+  width:100%;
+
+  height:350px;
+
+  object-fit:cover;
+
+  border-radius:20px;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+
+@media(max-width:768px){
+
+.gallery-grid{
+
+  grid-template-columns:1fr;
+
+}
+
+
+.gallery-grid img{
+
+height:250px;
+
+}
+
+}
