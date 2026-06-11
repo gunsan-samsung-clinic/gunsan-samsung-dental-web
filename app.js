@@ -272,16 +272,18 @@ console.log("후기 불러오기 실행");
 
   reviewList.innerHTML = "";
 
-const isAdmin = auth.currentUser;
+const isAdmin = auth.currentUser !== null;
   
   const querySnapshot =
     await getDocs(collection(db, "reviews"));
 
-  querySnapshot.forEach((reviewDoc) => {
+ let html = "";
 
-    const data = reviewDoc.data();
+querySnapshot.forEach((reviewDoc)=>{
 
-    reviewList.innerHTML += `
+  const data = reviewDoc.data();
+
+  html += `
   <div>
     <strong>${data.writer}</strong>
     <p>${data.content}</p>
@@ -293,11 +295,13 @@ const isAdmin = auth.currentUser;
     ` : ""}
 
     <hr>
+
   </div>
-`;
+  `;
 
-  });
+});
 
+reviewList.innerHTML = html;
 }
 
 /* =========================
