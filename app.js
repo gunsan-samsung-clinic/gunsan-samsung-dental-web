@@ -515,6 +515,8 @@ onAuthStateChanged(auth, (user) => {
 
   if(user){
 
+    console.log("로그인 이메일:", user.email);
+
     eventAdmin.style.display = "block";
     newsAdmin.style.display = "block";
 
