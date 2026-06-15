@@ -123,6 +123,8 @@ async function loadEvents() {
 
     const data = eventDoc.data();
 
+console.log(data);
+    
     eventList.innerHTML += `
       <div>
         ${data.image ? 
