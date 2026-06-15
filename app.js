@@ -75,13 +75,19 @@ saveBtn.addEventListener("click", async () => {
 
   try {
 
-    await addDoc(
-      collection(db, "events"),
-      {
-        title,
-        content,
-        createdAt: new Date()
-      }
+   const image =
+document.getElementById("eventImage").value;
+
+
+await addDoc(
+collection(db,"events"),
+{
+ image,
+ title,
+ content,
+ createdAt:new Date()
+}
+)
     );
 
     alert("이벤트 저장 완료");
@@ -121,9 +127,22 @@ async function loadEvents() {
 
     eventList.innerHTML += `
       <div>
-        <h4>${data.title}</h4>
-        <p>${data.content}</p>
-        <hr>
+        ${data.image ? 
+`
+<img 
+src="${data.image}"
+style="
+width:100%;
+border-radius:15px;
+margin-bottom:10px;
+">
+`
+:""}
+
+
+<h4>${data.title}</h4>
+
+<p>${data.content}</p>
       </div>
     `;
 
