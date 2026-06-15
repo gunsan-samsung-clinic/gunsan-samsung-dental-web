@@ -126,21 +126,20 @@ async function loadEvents() {
     eventList.innerHTML += `
       <div>
         ${data.image ? 
-`
-<img 
-src="${data.image}"
-style="
-width:100%;
-border-radius:15px;
-margin-bottom:10px;
-">
-`
-:""}
+        `
+        <img 
+        src="${data.image}"
+        style="
+        width:100%;
+        border-radius:15px;
+        margin-bottom:10px;
+        ">
+        `
+        :""}
 
+        <h4>${data.title}</h4>
 
-<h4>${data.title}</h4>
-
-<p>${data.content}</p>
+        <p>${data.content}</p>
       </div>
     `;
 
