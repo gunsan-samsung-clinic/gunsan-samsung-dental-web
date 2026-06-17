@@ -261,3 +261,39 @@ footer{
 
 
 }
+
+#eventList{
+
+display:flex;
+flex-direction:column;
+gap:25px;
+
+}
+
+
+.event-card{
+
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+}
+
+
+
+.event-image{
+
+width:100%;
+height:420px;
+object-fit:cover;
+
+}
+
+
+
+.event-text{
+
+padding:20px;
+
+}
