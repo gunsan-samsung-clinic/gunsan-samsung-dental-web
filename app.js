@@ -65,52 +65,141 @@ if(adminBtn){
 
 const saveBtn = document.getElementById("saveEvent");
 
+
 saveBtn.addEventListener("click", async () => {
 
+
   const title =
-    document.getElementById("eventTitle").value;
+  document.getElementById("eventTitle").value;
+
 
   const content =
-    document.getElementById("eventContent").value;
+  document.getElementById("eventContent").value;
+
+
+  const image =
+  document.getElementById("eventImage").value;
+
+
 
   try {
 
-   const image =
-document.getElementById("eventImage").value;
 
+    await addDoc(
+      collection(db,"events"),
+      {
 
-await addDoc(
-collection(db,"events"),
-{
- image,
- title,
- content,
- createdAt:new Date()
-}
-)
+        image,
+        title,
+        content,
+        createdAt:new Date()
+
+      }
     );
+
 
     alert("이벤트 저장 완료");
 
+
     loadEvents();
 
-    document.getElementById("eventTitle").value = "";
-    document.getElementById("eventContent").value = "";
 
-  } catch (err) {
+
+    document.getElementById("eventTitle").value="";
+    document.getElementById("eventContent").value="";
+    document.getElementById("eventImage").value="";
+
+
+
+  } catch(err){
 
     console.error(err);
 
   }
 
+
+});
+
+
+
 /* =========================
    이벤트 목록
 ========================= */
 
-async function loadEvents() {
+
+async function loadEvents(){
+
+
+const eventList =
+document.getElementById("eventList");
+
+
+if(!eventList) return;
+
+
+
+eventList.innerHTML="";
+
+
+
+const querySnapshot =
+await getDocs(collection(db,"events"));
+
+
+
+querySnapshot.forEach((eventDoc)=>{
+
+
+const data =
+eventDoc.data();
+
+
+
+eventList.innerHTML += `
+
+
+<div class="event-card">
+
+
+
+${data.image ? `
+
+<img
+class="event-image"
+src="${data.image}">
+
+` : ""}
+
+
+
+<div class="event-text">
+
+<h3>
+${data.title}
+</h3>
+
+
+<p>
+${data.content}
+</p>
+
+
+</div>
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+}
+
 
 loadEvents();
-
 /* =========================
    병원소식 저장
 ========================= */
@@ -123,6 +212,7 @@ if (saveNewsBtn) {
   saveNewsBtn.addEventListener("click", async () => {
 
     const title =
+      
       document.getElementById("newsTitle").value;
 
     const content =
