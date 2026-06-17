@@ -80,6 +80,9 @@ saveBtn.addEventListener("click", async () => {
   const image =
   document.getElementById("eventImage").value;
 
+  const video =
+document.getElementById("eventVideo").value;
+
 
 
   try {
@@ -87,14 +90,13 @@ saveBtn.addEventListener("click", async () => {
 
     await addDoc(
       collection(db,"events"),
-      {
-
-        image,
-        title,
-        content,
-        createdAt:new Date()
-
-      }
+    {
+ image,
+ video,
+ title,
+ content,
+ createdAt:new Date()
+}
     );
 
 
@@ -170,7 +172,18 @@ src="${data.image}">
 
 ` : ""}
 
+${data.video ? `
 
+<video
+class="event-video"
+controls
+playsinline>
+
+<source src="${data.video}" type="video/mp4">
+
+</video>
+
+` : ""}
 
 <div class="event-text">
 
