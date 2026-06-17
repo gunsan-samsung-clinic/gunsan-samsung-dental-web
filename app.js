@@ -109,46 +109,6 @@ collection(db,"events"),
 
 async function loadEvents() {
 
-  const eventList =
-    document.getElementById("eventList");
-
-  if (!eventList) return;
-
-  eventList.innerHTML = "";
-
-  const querySnapshot =
-    await getDocs(collection(db, "events"));
-
-  querySnapshot.forEach((eventDoc) => {
-
-    const data = eventDoc.data();
-
-console.log(data);
-    
-    eventList.innerHTML += `
-      <div>
-        ${data.image ? 
-        `
-        <img 
-        src="${data.image}"
-        style="
-        width:100%;
-        border-radius:15px;
-        margin-bottom:10px;
-        ">
-        `
-        :""}
-
-        <h4>${data.title}</h4>
-
-        <p>${data.content}</p>
-      </div>
-    `;
-
-  });
-
-}
-
 loadEvents();
 
 /* =========================
@@ -216,6 +176,8 @@ async function loadNews() {
 
     const data = newsDoc.data();
 
+ console.log(data);
+    
     newsList.innerHTML += `
       <div>
         <h4>${data.title}</h4>
