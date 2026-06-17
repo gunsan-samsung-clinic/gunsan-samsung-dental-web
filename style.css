@@ -297,3 +297,18 @@ object-fit:cover;
 padding:20px;
 
 }
+
+.event-video{
+
+  width:100%;
+  max-width:400px;
+
+  height:700px;
+
+  border:none;
+  border-radius:20px;
+
+  display:block;
+  margin:0 auto;
+
+}
