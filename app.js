@@ -164,7 +164,7 @@ eventList.innerHTML += `
 
 <img
 class="event-image"
-src="images/event1.jpg">
+src="images/event1.png">
 
 
 <video
