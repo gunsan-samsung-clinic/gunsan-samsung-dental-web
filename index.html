@@ -9,187 +9,87 @@
 
 <body>
 
-  <!-- HEADER -->
+
 <header>
 
   <div class="logo">
     🦷 군산 삼성치과 고객관리
   </div>
 
- <button id="adminBtn">
+  <button id="adminBtn">
     관리자
   </button>
-  
+
 </header>
 
-  <!-- 메인 컨텐츠 -->
-  <div class="container">
 
-  <!-- 메인 릴스 영상 -->
+
+<div class="container">
+
+
+  <!-- 첫 화면 영상 -->
+
   <section class="hero-video">
 
-    <video 
+    <video
       autoplay
       muted
       loop
       playsinline>
 
-      <source 
+      <source
       src="videosevent1.mp4"
       type="video/mp4">
 
     </video>
 
 
-    <div class="hero-text">
+  </section>
 
-      <h1>
-      군산 삼성치과
-      </h1>
 
-      <p>
-      고객님을 위한 특별한 공간
-      </p>
 
-    </div>
+  <!-- 이벤트 -->
 
+  <section class="content-card">
+
+    <h2>🎁 이벤트</h2>
+
+    <div id="eventList"></div>
 
   </section>
 
 
-  <!-- 공지사항 -->
- <section class="content-card event-section">
 
-<h2>🎁 진행중인 이벤트</h2>
+  <!-- 공지 -->
 
-<div id="eventList"></div>
+  <section class="content-card">
 
-      <div id="eventAdmin">
+    <h2>📢 공지사항</h2>
 
-       <input
-id="eventImage"
-placeholder="이미지 주소">
-
-        <input
-id="eventVideo"
-placeholder="영상 주소 입력">
-
-<input
-id="eventTitle"
-placeholder="공지 제목">
-
-
-<textarea
-id="eventContent"
-placeholder="공지 내용"></textarea>
-        <button id="saveEvent">
-          공지 등록
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- 병원소식 -->
-    <section class="content-card">
-
-      <h2>📰 병원 소식</h2>
-
-      <div id="newsList"></div>
-
-      <div id="newsAdmin">
-
-        <input
-          id="newsTitle"
-          placeholder="소식 제목">
-
-        <textarea
-          id="newsContent"
-          placeholder="소식 내용"></textarea>
-
-        <button id="saveNews">
-          소식 등록
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- 후기 -->
-    <section class="content-card">
-
-      <h2>⭐ 환자 후기</h2>
-
-      <input
-        id="reviewWriter"
-        placeholder="작성자">
-
-      <textarea
-        id="reviewText"
-        placeholder="후기 작성"></textarea>
-
-      <button id="reviewBtn">
-        후기 등록
-      </button>
-
-      <div id="reviewList"></div>
-
-    </section>
-
-    <!-- 메모 -->
-    <section class="content-card">
-
-      <h2>📝 환자 메모</h2>
-
-      <input
-        id="memoWriter"
-        placeholder="작성자">
-
-      <textarea
-        id="memoText"
-        placeholder="메모 작성"></textarea>
-
-      <button id="memoBtn">
-        메모 등록
-      </button>
-
-      <div id="memoList"></div>
-
-    </section>
-
-  </div>
-
-  <!-- 관리자 -->
-  <section
-class="admin-login">
-
-    <h2>🔐 관리자 로그인</h2>
-
-    <input
-      id="email"
-      placeholder="이메일">
-
-    <input
-      id="password"
-      type="password"
-      placeholder="비밀번호">
-
-    <button id="loginBtn">
-      로그인
-    </button>
-
-    <button id="logoutBtn">
-      로그아웃
-    </button>
+    <div id="newsList"></div>
 
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 군산 삼성치과. All rights reserved.</p>
-  </footer>
 
-  <script type="module" src="app.js"></script>
+
+  <!-- 후기 -->
+
+  <section class="content-card">
+
+    <h2>⭐ 후기</h2>
+
+    <div id="reviewList"></div>
+
+  </section>
+
+
+
+</div>
+
+
+
+<script type="module" src="app.js"></script>
+
 
 </body>
 </html>
