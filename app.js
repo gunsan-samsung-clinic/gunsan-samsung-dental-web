@@ -159,33 +159,32 @@ eventDoc.data();
 
 eventList.innerHTML += `
 
-
 <div class="event-card">
 
 
-
-${data.image ? `
-
 <img
 class="event-image"
-src="${data.image}">
+src="images/event1.jpg">
 
-` : ""}
-
-${data.video ? `
 
 <video
 class="event-video"
-controls
+autoplay
+muted
+loop
 playsinline>
 
-<source src="${data.video}" type="video/mp4">
+
+<source
+src="videosevent1.mp4"
+type="video/mp4">
+
 
 </video>
 
-` : ""}
 
 <div class="event-text">
+
 
 <h3>
 ${data.title}
@@ -202,6 +201,7 @@ ${data.content}
 
 </div>
 
+`;
 
 `;
 
