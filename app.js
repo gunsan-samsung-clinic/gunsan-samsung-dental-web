@@ -131,6 +131,7 @@ document.getElementById("eventVideo").value;
 
 async function loadEvents(){
 
+  console.log("이벤트 불러오기 실행");
 
 const eventList =
 document.getElementById("eventList");
@@ -155,7 +156,7 @@ querySnapshot.forEach((eventDoc)=>{
 const data =
 eventDoc.data();
 
-
+console.log(data);
 
 eventList.innerHTML += `
 
