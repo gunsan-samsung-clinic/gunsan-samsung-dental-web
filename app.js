@@ -164,7 +164,7 @@ eventList.innerHTML += `
 
 <img
 class="event-image"
-src="images/event1.png">
+src="event1.png">
 
 
 <video
@@ -185,7 +185,6 @@ type="video/mp4">
 
 <div class="event-text">
 
-
 <h3>
 ${data.title}
 </h3>
@@ -202,9 +201,6 @@ ${data.content}
 </div>
 
 `;
-
-`;
-
 
 });
 
