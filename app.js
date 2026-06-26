@@ -28,9 +28,14 @@ document.getElementById("eventAdmin");
 const newsAdmin =
 document.getElementById("newsAdmin");
 
-eventAdmin.style.display = "none";
-newsAdmin.style.display = "none";
+if(eventAdmin){
+  eventAdmin.style.display = "none";
+}
 
+
+if(newsAdmin){
+  newsAdmin.style.display = "none";
+}
 const adminBtn =
 document.getElementById("adminBtn");
 
