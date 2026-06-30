@@ -7,26 +7,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<video 
-width="300"
-controls>
-
-<source src="videosevent1.mp4">
-
-</video>
-  
 <body>
 
 
 <header>
 
-  <div class="logo">
-    🦷 군산 삼성치과 고객관리
-  </div>
+<div class="logo">
+🦷 군산 삼성치과 고객관리
+</div>
 
-  <button id="adminBtn">
-    관리자
-  </button>
+<button id="adminBtn">
+관리자
+</button>
 
 </header>
 
@@ -35,69 +27,146 @@ controls>
 <div class="container">
 
 
-  <!-- 첫 화면 영상 -->
+<!-- 1분 치아상식 -->
 
-  <section class="hero-video">
+<section class="content-card">
 
-    <video
-      autoplay
-      muted
-      loop
-      playsinline>
+<h2>
+🦷 1분 치아상식
+</h2>
 
-      <source
-      src="videosevent1.mp4"
-      type="video/mp4">
+<div class="video-card">
 
-    </video>
+<img src="clinic1.jpg">
 
+<p>
+치아 건강 정보를 확인하세요
+</p>
 
-  </section>
+</div>
 
-
-
-  <!-- 이벤트 -->
-
-  <section class="content-card">
-
-    <h2>🎁 이벤트</h2>
-
-    <div id="eventList"></div>
-
-  </section>
+</section>
 
 
 
-  <!-- 공지 -->
 
-  <section class="content-card">
+<!-- 릴스 -->
 
-    <h2>📢 공지사항</h2>
-
-    <div id="newsList"></div>
-
-  </section>
+<section class="content-card">
 
 
+<h2>
+🎬 릴스
+</h2>
 
-  <!-- 후기 -->
 
-  <section class="content-card">
+<div class="hero-video">
 
-    <h2>⭐ 후기</h2>
 
-    <div id="reviewList"></div>
+<video
+autoplay
+muted
+loop
+playsinline>
 
-  </section>
+
+<source
+src="videosevent1.mp4"
+type="video/mp4">
+
+
+</video>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- 이벤트 -->
+
+
+<section class="content-card">
+
+
+<h2>
+🎁 이벤트
+</h2>
+
+
+<div id="eventList"></div>
+
+
+</section>
+
+
+
+
+
+<!-- 공지 -->
+
+<section class="content-card">
+
+
+<h2>
+📢 공지사항
+</h2>
+
+
+<div id="newsList"></div>
+
+
+</section>
+
+
+
+
+
+<!-- 질의문답 -->
+
+<section class="content-card">
+
+
+<h2>
+❓ 질의문답
+</h2>
+
+
+<div id="questionList"></div>
+
+
+</section>
+
+
+
+
+
+<!-- 후기 -->
+
+<section class="content-card">
+
+
+<h2>
+⭐ 후기
+</h2>
+
+
+<div id="reviewList"></div>
+
+
+</section>
+
 
 
 
 </div>
 
 
-
 <script type="module" src="app.js"></script>
 
 
 </body>
-</html>
