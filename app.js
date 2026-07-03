@@ -71,6 +71,8 @@ if(adminBtn){
 const saveBtn = document.getElementById("saveEvent");
 
 
+if(saveBtn){
+
 saveBtn.addEventListener("click", async () => {
 
 
@@ -127,7 +129,7 @@ document.getElementById("eventVideo").value;
 
 });
 
-
+}
 
 /* =========================
    이벤트 목록
@@ -465,6 +467,8 @@ const isAdmin = auth.currentUser;
    로그인
 ========================= */
 
+if(loginBtn){
+
 loginBtn.addEventListener(
 "click",
 async () => {
@@ -502,6 +506,8 @@ if(adminLogin){
 /* =========================
    로그아웃
 ========================= */
+
+if(logoutBtn){
 
 logoutBtn.addEventListener(
 "click",
