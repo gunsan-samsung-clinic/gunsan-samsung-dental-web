@@ -49,13 +49,28 @@ header{
 
 
 .logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
 
-font-size:18px;
+.logo img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    object-fit:cover;
+}
 
-font-weight:700;
+.logo h1{
+    margin:0;
+    font-size:22px;
+    color:#1565c0;
+}
 
-color:#1565c0;
-
+.logo p{
+    margin:3px 0 0;
+    font-size:14px;
+    color:#666;
 }
 
 
