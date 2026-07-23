@@ -31,7 +31,37 @@
     <button class="tab-btn" data-tab="consultations">상담 신청함</button>
   </nav>
 
-  <!-- 각 태스크가 아래에 순서대로 tab-panel을 추가한다 -->
+  <section id="tab-events" class="tab-panel">
+    <h2>이벤트 관리</h2>
+    <form id="eventForm" class="admin-form">
+      <input type="text" id="eventTitle" placeholder="이벤트 제목" required>
+      <textarea id="eventContent" placeholder="이벤트 내용" required></textarea>
+      <button type="submit">이벤트 추가</button>
+    </form>
+    <div id="eventAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-news" class="tab-panel hidden">
+    <h2>공지사항 관리</h2>
+    <form id="newsForm" class="admin-form">
+      <input type="text" id="newsTitle" placeholder="공지 제목" required>
+      <textarea id="newsContent" placeholder="공지 내용" required></textarea>
+      <button type="submit">공지 추가</button>
+    </form>
+    <div id="newsAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-reviews" class="tab-panel hidden">
+    <h2>후기 관리</h2>
+    <form id="reviewForm" class="admin-form">
+      <input type="text" id="reviewWriter" placeholder="작성자" required>
+      <textarea id="reviewContent" placeholder="후기 내용" required></textarea>
+      <button type="submit">후기 추가</button>
+    </form>
+    <div id="reviewAdminList" class="admin-list"></div>
+  </section>
+
+  <!-- Task 4가 여기 아래에 혜택·쿠폰 패널을 추가한다 -->
 
 </div>
 

@@ -40,6 +40,9 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     loginSection.classList.add("hidden");
     adminSection.classList.remove("hidden");
+    loadEventsAdmin();
+    loadNewsAdmin();
+    loadReviewsAdmin();
   } else {
     loginSection.classList.remove("hidden");
     adminSection.classList.add("hidden");
@@ -60,7 +63,9 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 /* ========== 공용 삭제 처리 (Task 3부터 각 목록에서 사용) ========== */
 
 function reloadTab(col) {
-  // Task 3~6에서 각 컬렉션 분기를 추가한다
+  if (col === "events") loadEventsAdmin();
+  if (col === "news") loadNewsAdmin();
+  if (col === "reviews") loadReviewsAdmin();
 }
 
 async function handleDeleteClick(e) {
@@ -69,4 +74,94 @@ async function handleDeleteClick(e) {
   if (!confirm("정말 삭제하시겠습니까?")) return;
   await deleteDoc(doc(db, col, id));
   reloadTab(col);
+}
+
+/* ========== 이벤트 ========== */
+
+const eventForm = document.getElementById("eventForm");
+const eventAdminList = document.getElementById("eventAdminList");
+
+eventForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const title = document.getElementById("eventTitle").value.trim();
+  const content = document.getElementById("eventContent").value.trim();
+  if (!title || !content) return;
+  await addDoc(collection(db, "events"), { title, content });
+  eventForm.reset();
+  loadEventsAdmin();
+});
+
+async function loadEventsAdmin() {
+  eventAdminList.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "events"));
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    eventAdminList.innerHTML += `
+      <div class="list-item">
+        <div><h3>${data.title}</h3><p>${data.content}</p></div>
+        <button class="btn-danger" data-id="${docSnap.id}" data-collection="events">삭제</button>
+      </div>
+    `;
+  });
+  eventAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+}
+
+/* ========== 공지사항 ========== */
+
+const newsForm = document.getElementById("newsForm");
+const newsAdminList = document.getElementById("newsAdminList");
+
+newsForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const title = document.getElementById("newsTitle").value.trim();
+  const content = document.getElementById("newsContent").value.trim();
+  if (!title || !content) return;
+  await addDoc(collection(db, "news"), { title, content });
+  newsForm.reset();
+  loadNewsAdmin();
+});
+
+async function loadNewsAdmin() {
+  newsAdminList.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "news"));
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    newsAdminList.innerHTML += `
+      <div class="list-item">
+        <div><h3>${data.title}</h3><p>${data.content}</p></div>
+        <button class="btn-danger" data-id="${docSnap.id}" data-collection="news">삭제</button>
+      </div>
+    `;
+  });
+  newsAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+}
+
+/* ========== 후기 ========== */
+
+const reviewForm = document.getElementById("reviewForm");
+const reviewAdminList = document.getElementById("reviewAdminList");
+
+reviewForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const writer = document.getElementById("reviewWriter").value.trim();
+  const content = document.getElementById("reviewContent").value.trim();
+  if (!writer || !content) return;
+  await addDoc(collection(db, "reviews"), { writer, content });
+  reviewForm.reset();
+  loadReviewsAdmin();
+});
+
+async function loadReviewsAdmin() {
+  reviewAdminList.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "reviews"));
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    reviewAdminList.innerHTML += `
+      <div class="list-item">
+        <div><strong>${data.writer}</strong><p>${data.content}</p></div>
+        <button class="btn-danger" data-id="${docSnap.id}" data-collection="reviews">삭제</button>
+      </div>
+    `;
+  });
+  reviewAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
 }

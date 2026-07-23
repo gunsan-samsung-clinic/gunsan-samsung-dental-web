@@ -626,3 +626,46 @@ height:220px;
 .tab-panel {
   padding: 0 24px 40px;
 }
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 10px;
+  font: inherit;
+}
+
+.admin-form button[type="submit"] {
+  align-self: flex-start;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.btn-danger {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
