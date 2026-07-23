@@ -61,7 +61,20 @@
     <div id="reviewAdminList" class="admin-list"></div>
   </section>
 
-  <!-- Task 4가 여기 아래에 혜택·쿠폰 패널을 추가한다 -->
+  <section id="tab-benefits" class="tab-panel hidden">
+    <h2>혜택·쿠폰 관리</h2>
+    <form id="benefitForm" class="admin-form">
+      <input type="text" id="benefitTitle" placeholder="혜택 제목" required>
+      <textarea id="benefitDescription" placeholder="혜택 설명" required></textarea>
+      <label>시작일 <input type="date" id="benefitStart" required></label>
+      <label>종료일 <input type="date" id="benefitEnd" required></label>
+      <label><input type="checkbox" id="benefitActive" checked> 고객 페이지에 보이기</label>
+      <button type="submit">혜택 추가</button>
+    </form>
+    <div id="benefitAdminList" class="admin-list"></div>
+  </section>
+
+  <!-- Task 5가 여기 아래에 사후관리 안내 패널을 추가한다-->
 
 </div>
 

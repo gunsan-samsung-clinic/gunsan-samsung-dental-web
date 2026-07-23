@@ -43,6 +43,7 @@ onAuthStateChanged(auth, (user) => {
     loadEventsAdmin();
     loadNewsAdmin();
     loadReviewsAdmin();
+    loadBenefitsAdmin();
   } else {
     loginSection.classList.remove("hidden");
     adminSection.classList.add("hidden");
@@ -66,6 +67,7 @@ function reloadTab(col) {
   if (col === "events") loadEventsAdmin();
   if (col === "news") loadNewsAdmin();
   if (col === "reviews") loadReviewsAdmin();
+  if (col === "benefits") loadBenefitsAdmin();
 }
 
 async function handleDeleteClick(e) {
@@ -164,4 +166,54 @@ async function loadReviewsAdmin() {
     `;
   });
   reviewAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+}
+
+/* ========== 혜택·쿠폰 ========== */
+
+const benefitForm = document.getElementById("benefitForm");
+const benefitAdminList = document.getElementById("benefitAdminList");
+
+benefitForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const title = document.getElementById("benefitTitle").value.trim();
+  const description = document.getElementById("benefitDescription").value.trim();
+  const startDate = document.getElementById("benefitStart").value;
+  const endDate = document.getElementById("benefitEnd").value;
+  const active = document.getElementById("benefitActive").checked;
+  if (!title || !description || !startDate || !endDate) return;
+
+  await addDoc(collection(db, "benefits"), { title, description, startDate, endDate, active });
+  benefitForm.reset();
+  document.getElementById("benefitActive").checked = true;
+  loadBenefitsAdmin();
+});
+
+async function loadBenefitsAdmin() {
+  benefitAdminList.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "benefits"));
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    benefitAdminList.innerHTML += `
+      <div class="list-item">
+        <div>
+          <h3>${data.title} ${data.active ? "" : "(숨김)"}</h3>
+          <p>${data.description}</p>
+          <span class="benefit-period">${data.startDate} ~ ${data.endDate}</span>
+        </div>
+        <div class="list-item-actions">
+          <button class="btn-toggle" data-id="${docSnap.id}" data-active="${data.active}">${data.active ? "숨기기" : "보이기"}</button>
+          <button class="btn-danger" data-id="${docSnap.id}" data-collection="benefits">삭제</button>
+        </div>
+      </div>
+    `;
+  });
+  benefitAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  benefitAdminList.querySelectorAll(".btn-toggle").forEach((btn) => btn.addEventListener("click", handleToggleActive));
+}
+
+async function handleToggleActive(e) {
+  const id = e.target.dataset.id;
+  const nextActive = e.target.dataset.active !== "true";
+  await updateDoc(doc(db, "benefits", id), { active: nextActive });
+  loadBenefitsAdmin();
 }
