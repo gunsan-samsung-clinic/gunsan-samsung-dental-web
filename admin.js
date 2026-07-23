@@ -44,6 +44,7 @@ onAuthStateChanged(auth, (user) => {
     loadNewsAdmin();
     loadReviewsAdmin();
     loadBenefitsAdmin();
+    loadAftercareAdmin();
   } else {
     loginSection.classList.remove("hidden");
     adminSection.classList.add("hidden");
@@ -68,6 +69,7 @@ function reloadTab(col) {
   if (col === "news") loadNewsAdmin();
   if (col === "reviews") loadReviewsAdmin();
   if (col === "benefits") loadBenefitsAdmin();
+  if (col === "aftercare") loadAftercareAdmin();
 }
 
 async function handleDeleteClick(e) {
@@ -216,4 +218,39 @@ async function handleToggleActive(e) {
   const nextActive = e.target.dataset.active !== "true";
   await updateDoc(doc(db, "benefits", id), { active: nextActive });
   loadBenefitsAdmin();
+}
+
+/* ========== 사후관리 안내 ========== */
+
+const aftercareForm = document.getElementById("aftercareForm");
+const aftercareAdminList = document.getElementById("aftercareAdminList");
+
+aftercareForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const procedureName = document.getElementById("aftercareProcedure").value.trim();
+  const content = document.getElementById("aftercareContent").value.trim();
+  const order = Number(document.getElementById("aftercareOrder").value) || 0;
+  if (!procedureName || !content) return;
+
+  await addDoc(collection(db, "aftercare"), { procedureName, content, order });
+  aftercareForm.reset();
+  loadAftercareAdmin();
+});
+
+async function loadAftercareAdmin() {
+  aftercareAdminList.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "aftercare"));
+  const items = [];
+  snapshot.forEach((docSnap) => items.push({ id: docSnap.id, ...docSnap.data() }));
+  items.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+  items.forEach((data) => {
+    aftercareAdminList.innerHTML += `
+      <div class="list-item">
+        <div><h3>${data.procedureName} (순서 ${data.order})</h3><p>${data.content}</p></div>
+        <button class="btn-danger" data-id="${data.id}" data-collection="aftercare">삭제</button>
+      </div>
+    `;
+  });
+  aftercareAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
 }

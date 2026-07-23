@@ -74,7 +74,18 @@
     <div id="benefitAdminList" class="admin-list"></div>
   </section>
 
-  <!-- Task 5가 여기 아래에 사후관리 안내 패널을 추가한다 -->
+  <section id="tab-aftercare" class="tab-panel hidden">
+    <h2>사후관리 안내 관리</h2>
+    <form id="aftercareForm" class="admin-form">
+      <input type="text" id="aftercareProcedure" placeholder="시술명 (예: 임플란트)" required>
+      <textarea id="aftercareContent" placeholder="관리 안내 내용" required></textarea>
+      <input type="number" id="aftercareOrder" placeholder="표시 순서 (숫자, 작을수록 먼저)" value="0">
+      <button type="submit">안내 추가</button>
+    </form>
+    <div id="aftercareAdminList" class="admin-list"></div>
+  </section>
+
+  <!-- Task 6이 여기 아래에 상담 신청함 패널을 추가한다 -->
 
 </div>
 
