@@ -713,3 +713,36 @@ height:220px;
   padding: 6px 12px;
   cursor: pointer;
 }
+
+.customer-header {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.customer-header img {
+  max-width: 120px;
+}
+
+.benefit-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-toggle {
+  width: 100%;
+  text-align: left;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.accordion-content {
+  padding: 0 0 12px;
+}

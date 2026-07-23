@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>군산 삼성치과 - 고객 전용</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="customer-header">
+  <img src="clinic2.png" alt="군산 삼성치과">
+  <h1>찾아주셔서 감사합니다</h1>
+  <p>군산 삼성치과를 이용해주신 고객님을 위한 페이지입니다.</p>
+</header>
+
+<main>
+  <section class="content-card">
+    <h2>🎁 고객 전용 혜택</h2>
+    <div id="benefitList"></div>
+  </section>
+
+  <section class="content-card">
+    <h2>🦷 치료 후 관리 안내</h2>
+    <div id="aftercareList"></div>
+  </section>
+
+  <section class="content-card">
+    <h2>💬 상담 신청</h2>
+    <form id="consultForm" class="admin-form">
+      <input type="text" id="consultName" placeholder="이름" required>
+      <input type="tel" id="consultPhone" placeholder="연락처" required>
+      <textarea id="consultMessage" placeholder="문의 내용" required></textarea>
+      <button type="submit">상담 신청하기</button>
+    </form>
+    <p id="consultSuccess" class="success-text hidden">접수되었습니다. 병원에서 연락드리겠습니다.</p>
+  </section>
+</main>
+
+<script type="module" src="customer.js"></script>
+</body>
+</html>
