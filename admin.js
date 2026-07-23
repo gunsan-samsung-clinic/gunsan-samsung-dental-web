@@ -45,6 +45,7 @@ onAuthStateChanged(auth, (user) => {
     loadReviewsAdmin();
     loadBenefitsAdmin();
     loadAftercareAdmin();
+    loadConsultationsAdmin();
   } else {
     loginSection.classList.remove("hidden");
     adminSection.classList.add("hidden");
@@ -70,6 +71,7 @@ function reloadTab(col) {
   if (col === "reviews") loadReviewsAdmin();
   if (col === "benefits") loadBenefitsAdmin();
   if (col === "aftercare") loadAftercareAdmin();
+  if (col === "consultations") loadConsultationsAdmin();
 }
 
 async function handleDeleteClick(e) {
@@ -253,4 +255,42 @@ async function loadAftercareAdmin() {
     `;
   });
   aftercareAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+}
+
+/* ========== 상담 신청함 ========== */
+
+const consultationAdminList = document.getElementById("consultationAdminList");
+
+async function loadConsultationsAdmin() {
+  consultationAdminList.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "consultations"));
+  const items = [];
+  snapshot.forEach((docSnap) => items.push({ id: docSnap.id, ...docSnap.data() }));
+  items.sort((a, b) => b.createdAt - a.createdAt);
+
+  items.forEach((data) => {
+    const isChecked = data.status === "확인완료";
+    consultationAdminList.innerHTML += `
+      <div class="list-item">
+        <div>
+          <span class="status-badge ${isChecked ? "status-done" : "status-new"}">${isChecked ? "확인완료" : "신규"}</span>
+          <h3>${data.name} (${data.phone})</h3>
+          <p>${data.message}</p>
+        </div>
+        <div class="list-item-actions">
+          ${isChecked ? "" : `<button class="btn-check" data-id="${data.id}">확인완료로 표시</button>`}
+          <button class="btn-danger" data-id="${data.id}" data-collection="consultations">삭제</button>
+        </div>
+      </div>
+    `;
+  });
+
+  consultationAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  consultationAdminList.querySelectorAll(".btn-check").forEach((btn) => btn.addEventListener("click", handleMarkChecked));
+}
+
+async function handleMarkChecked(e) {
+  const id = e.target.dataset.id;
+  await updateDoc(doc(db, "consultations", id), { status: "확인완료" });
+  loadConsultationsAdmin();
 }

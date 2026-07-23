@@ -687,3 +687,29 @@ height:220px;
   font-size: 13px;
   color: #666;
 }
+
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.status-new {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.status-done {
+  background: #95a5a6;
+  color: #fff;
+}
+
+.btn-check {
+  background: #2c7be5;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
