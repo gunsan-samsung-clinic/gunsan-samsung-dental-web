@@ -570,3 +570,59 @@ height:220px;
 
 }
 
+/* ===== 관리자 공통 ===== */
+
+.hidden {
+  display: none !important;
+}
+
+#loginSection {
+  max-width: 320px;
+  margin: 80px auto;
+  padding: 24px;
+  text-align: center;
+}
+
+#loginSection input {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.error-text {
+  color: #c0392b;
+  font-size: 14px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 24px;
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #333;
+  color: #fff;
+}
+
+.tab-panel {
+  padding: 0 24px 40px;
+}

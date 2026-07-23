@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>군산 삼성치과 - 관리자</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginSection">
+  <h1>관리자 로그인</h1>
+  <input type="email" id="loginEmail" placeholder="이메일">
+  <input type="password" id="loginPassword" placeholder="비밀번호">
+  <button id="loginBtn">로그인</button>
+  <p id="loginError" class="error-text"></p>
+</div>
+
+<div id="adminSection" class="hidden">
+  <header class="admin-header">
+    <h1>군산 삼성치과 관리자</h1>
+    <button id="logoutBtn">로그아웃</button>
+  </header>
+
+  <nav class="admin-tabs">
+    <button class="tab-btn active" data-tab="events">이벤트</button>
+    <button class="tab-btn" data-tab="news">공지사항</button>
+    <button class="tab-btn" data-tab="reviews">후기</button>
+    <button class="tab-btn" data-tab="benefits">혜택·쿠폰</button>
+    <button class="tab-btn" data-tab="aftercare">사후관리 안내</button>
+    <button class="tab-btn" data-tab="consultations">상담 신청함</button>
+  </nav>
+
+  <!-- 각 태스크가 아래에 순서대로 tab-panel을 추가한다 -->
+
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
