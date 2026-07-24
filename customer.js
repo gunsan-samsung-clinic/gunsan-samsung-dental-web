@@ -5,6 +5,12 @@ import {
   addDoc
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str ?? "";
+  return div.innerHTML;
+}
+
 /* ========== 혜택·쿠폰 ========== */
 
 async function loadBenefits() {
@@ -25,8 +31,8 @@ async function loadBenefits() {
       shown++;
       benefitList.innerHTML += `
         <div class="benefit-card">
-          <h3>${data.title}</h3>
-          <p>${data.description}</p>
+          <h3>${escapeHtml(data.title)}</h3>
+          <p>${escapeHtml(data.description)}</p>
           <span class="benefit-period">${data.startDate} ~ ${data.endDate}</span>
         </div>
       `;
@@ -55,9 +61,9 @@ async function loadAftercare() {
     items.forEach((data, index) => {
       aftercareList.innerHTML += `
         <div class="accordion-item">
-          <button type="button" class="accordion-toggle" data-index="${index}">${data.procedureName}</button>
+          <button type="button" class="accordion-toggle" data-index="${index}">${escapeHtml(data.procedureName)}</button>
           <div class="accordion-content hidden" id="aftercare-content-${index}">
-            <p>${data.content}</p>
+            <p>${escapeHtml(data.content)}</p>
           </div>
         </div>
       `;
@@ -91,7 +97,7 @@ consultForm.addEventListener("submit", async (e) => {
   if (!name || !phone || !message) return;
 
   try {
-    document.getElementById("consultError").classList.add("hidden");
+    consultError.classList.add("hidden");
 
     await addDoc(collection(db, "consultations"), {
       name,
@@ -105,7 +111,7 @@ consultForm.addEventListener("submit", async (e) => {
     consultForm.classList.add("hidden");
     consultSuccess.classList.remove("hidden");
   } catch (err) {
-    document.getElementById("consultError").classList.remove("hidden");
+    consultError.classList.remove("hidden");
     console.error("Consultation submission error:", err);
   }
 });

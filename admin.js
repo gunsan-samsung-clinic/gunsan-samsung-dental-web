@@ -13,6 +13,12 @@ import {
   doc
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str ?? "";
+  return div.innerHTML;
+}
+
 /* ========== 로그인 / 로그아웃 ========== */
 
 const loginSection = document.getElementById("loginSection");
@@ -99,17 +105,21 @@ eventForm.addEventListener("submit", async (e) => {
 
 async function loadEventsAdmin() {
   eventAdminList.innerHTML = "";
-  const snapshot = await getDocs(collection(db, "events"));
-  snapshot.forEach((docSnap) => {
-    const data = docSnap.data();
-    eventAdminList.innerHTML += `
-      <div class="list-item">
-        <div><h3>${data.title}</h3><p>${data.content}</p></div>
-        <button class="btn-danger" data-id="${docSnap.id}" data-collection="events">삭제</button>
-      </div>
-    `;
-  });
-  eventAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  try {
+    const snapshot = await getDocs(collection(db, "events"));
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      eventAdminList.innerHTML += `
+        <div class="list-item">
+          <div><h3>${escapeHtml(data.title)}</h3><p>${escapeHtml(data.content)}</p></div>
+          <button class="btn-danger" data-id="${docSnap.id}" data-collection="events">삭제</button>
+        </div>
+      `;
+    });
+    eventAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  } catch (err) {
+    eventAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
 }
 
 /* ========== 공지사항 ========== */
@@ -129,17 +139,21 @@ newsForm.addEventListener("submit", async (e) => {
 
 async function loadNewsAdmin() {
   newsAdminList.innerHTML = "";
-  const snapshot = await getDocs(collection(db, "news"));
-  snapshot.forEach((docSnap) => {
-    const data = docSnap.data();
-    newsAdminList.innerHTML += `
-      <div class="list-item">
-        <div><h3>${data.title}</h3><p>${data.content}</p></div>
-        <button class="btn-danger" data-id="${docSnap.id}" data-collection="news">삭제</button>
-      </div>
-    `;
-  });
-  newsAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  try {
+    const snapshot = await getDocs(collection(db, "news"));
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      newsAdminList.innerHTML += `
+        <div class="list-item">
+          <div><h3>${escapeHtml(data.title)}</h3><p>${escapeHtml(data.content)}</p></div>
+          <button class="btn-danger" data-id="${docSnap.id}" data-collection="news">삭제</button>
+        </div>
+      `;
+    });
+    newsAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  } catch (err) {
+    newsAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
 }
 
 /* ========== 후기 ========== */
@@ -159,17 +173,21 @@ reviewForm.addEventListener("submit", async (e) => {
 
 async function loadReviewsAdmin() {
   reviewAdminList.innerHTML = "";
-  const snapshot = await getDocs(collection(db, "reviews"));
-  snapshot.forEach((docSnap) => {
-    const data = docSnap.data();
-    reviewAdminList.innerHTML += `
-      <div class="list-item">
-        <div><strong>${data.writer}</strong><p>${data.content}</p></div>
-        <button class="btn-danger" data-id="${docSnap.id}" data-collection="reviews">삭제</button>
-      </div>
-    `;
-  });
-  reviewAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  try {
+    const snapshot = await getDocs(collection(db, "reviews"));
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      reviewAdminList.innerHTML += `
+        <div class="list-item">
+          <div><strong>${escapeHtml(data.writer)}</strong><p>${escapeHtml(data.content)}</p></div>
+          <button class="btn-danger" data-id="${docSnap.id}" data-collection="reviews">삭제</button>
+        </div>
+      `;
+    });
+    reviewAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  } catch (err) {
+    reviewAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
 }
 
 /* ========== 혜택·쿠폰 ========== */
@@ -194,25 +212,29 @@ benefitForm.addEventListener("submit", async (e) => {
 
 async function loadBenefitsAdmin() {
   benefitAdminList.innerHTML = "";
-  const snapshot = await getDocs(collection(db, "benefits"));
-  snapshot.forEach((docSnap) => {
-    const data = docSnap.data();
-    benefitAdminList.innerHTML += `
-      <div class="list-item">
-        <div>
-          <h3>${data.title} ${data.active ? "" : "(숨김)"}</h3>
-          <p>${data.description}</p>
-          <span class="benefit-period">${data.startDate} ~ ${data.endDate}</span>
+  try {
+    const snapshot = await getDocs(collection(db, "benefits"));
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      benefitAdminList.innerHTML += `
+        <div class="list-item">
+          <div>
+            <h3>${escapeHtml(data.title)} ${data.active ? "" : "(숨김)"}</h3>
+            <p>${escapeHtml(data.description)}</p>
+            <span class="benefit-period">${data.startDate} ~ ${data.endDate}</span>
+          </div>
+          <div class="list-item-actions">
+            <button class="btn-toggle" data-id="${docSnap.id}" data-active="${data.active}">${data.active ? "숨기기" : "보이기"}</button>
+            <button class="btn-danger" data-id="${docSnap.id}" data-collection="benefits">삭제</button>
+          </div>
         </div>
-        <div class="list-item-actions">
-          <button class="btn-toggle" data-id="${docSnap.id}" data-active="${data.active}">${data.active ? "숨기기" : "보이기"}</button>
-          <button class="btn-danger" data-id="${docSnap.id}" data-collection="benefits">삭제</button>
-        </div>
-      </div>
-    `;
-  });
-  benefitAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
-  benefitAdminList.querySelectorAll(".btn-toggle").forEach((btn) => btn.addEventListener("click", handleToggleActive));
+      `;
+    });
+    benefitAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+    benefitAdminList.querySelectorAll(".btn-toggle").forEach((btn) => btn.addEventListener("click", handleToggleActive));
+  } catch (err) {
+    benefitAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
 }
 
 async function handleToggleActive(e) {
@@ -241,20 +263,24 @@ aftercareForm.addEventListener("submit", async (e) => {
 
 async function loadAftercareAdmin() {
   aftercareAdminList.innerHTML = "";
-  const snapshot = await getDocs(collection(db, "aftercare"));
-  const items = [];
-  snapshot.forEach((docSnap) => items.push({ id: docSnap.id, ...docSnap.data() }));
-  items.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  try {
+    const snapshot = await getDocs(collection(db, "aftercare"));
+    const items = [];
+    snapshot.forEach((docSnap) => items.push({ id: docSnap.id, ...docSnap.data() }));
+    items.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
-  items.forEach((data) => {
-    aftercareAdminList.innerHTML += `
-      <div class="list-item">
-        <div><h3>${data.procedureName} (순서 ${data.order})</h3><p>${data.content}</p></div>
-        <button class="btn-danger" data-id="${data.id}" data-collection="aftercare">삭제</button>
-      </div>
-    `;
-  });
-  aftercareAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+    items.forEach((data) => {
+      aftercareAdminList.innerHTML += `
+        <div class="list-item">
+          <div><h3>${escapeHtml(data.procedureName)} (순서 ${data.order})</h3><p>${escapeHtml(data.content)}</p></div>
+          <button class="btn-danger" data-id="${data.id}" data-collection="aftercare">삭제</button>
+        </div>
+      `;
+    });
+    aftercareAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  } catch (err) {
+    aftercareAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
 }
 
 /* ========== 상담 신청함 ========== */
@@ -263,30 +289,34 @@ const consultationAdminList = document.getElementById("consultationAdminList");
 
 async function loadConsultationsAdmin() {
   consultationAdminList.innerHTML = "";
-  const snapshot = await getDocs(collection(db, "consultations"));
-  const items = [];
-  snapshot.forEach((docSnap) => items.push({ id: docSnap.id, ...docSnap.data() }));
-  items.sort((a, b) => b.createdAt - a.createdAt);
+  try {
+    const snapshot = await getDocs(collection(db, "consultations"));
+    const items = [];
+    snapshot.forEach((docSnap) => items.push({ id: docSnap.id, ...docSnap.data() }));
+    items.sort((a, b) => b.createdAt - a.createdAt);
 
-  items.forEach((data) => {
-    const isChecked = data.status === "확인완료";
-    consultationAdminList.innerHTML += `
-      <div class="list-item">
-        <div>
-          <span class="status-badge ${isChecked ? "status-done" : "status-new"}">${isChecked ? "확인완료" : "신규"}</span>
-          <h3>${data.name} (${data.phone})</h3>
-          <p>${data.message}</p>
+    items.forEach((data) => {
+      const isChecked = data.status === "확인완료";
+      consultationAdminList.innerHTML += `
+        <div class="list-item">
+          <div>
+            <span class="status-badge ${isChecked ? "status-done" : "status-new"}">${isChecked ? "확인완료" : "신규"}</span>
+            <h3>${escapeHtml(data.name)} (${escapeHtml(data.phone)})</h3>
+            <p>${escapeHtml(data.message)}</p>
+          </div>
+          <div class="list-item-actions">
+            ${isChecked ? "" : `<button class="btn-check" data-id="${data.id}">확인완료로 표시</button>`}
+            <button class="btn-danger" data-id="${data.id}" data-collection="consultations">삭제</button>
+          </div>
         </div>
-        <div class="list-item-actions">
-          ${isChecked ? "" : `<button class="btn-check" data-id="${data.id}">확인완료로 표시</button>`}
-          <button class="btn-danger" data-id="${data.id}" data-collection="consultations">삭제</button>
-        </div>
-      </div>
-    `;
-  });
+      `;
+    });
 
-  consultationAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
-  consultationAdminList.querySelectorAll(".btn-check").forEach((btn) => btn.addEventListener("click", handleMarkChecked));
+    consultationAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+    consultationAdminList.querySelectorAll(".btn-check").forEach((btn) => btn.addEventListener("click", handleMarkChecked));
+  } catch (err) {
+    consultationAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
 }
 
 async function handleMarkChecked(e) {
