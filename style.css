@@ -746,3 +746,8 @@ height:220px;
 .accordion-content {
   padding: 0 0 12px;
 }
+
+.success-text {
+  color: #2e7d32;
+  font-weight: bold;
+}

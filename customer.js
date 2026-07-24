@@ -1,7 +1,8 @@
 import { db } from "./firebase.js";
 import {
   collection,
-  getDocs
+  getDocs,
+  addDoc
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 /* ========== 혜택·쿠폰 ========== */
@@ -74,3 +75,34 @@ async function loadAftercare() {
 
 loadBenefits();
 loadAftercare();
+
+/* ========== 상담 신청 ========== */
+
+const consultForm = document.getElementById("consultForm");
+const consultSuccess = document.getElementById("consultSuccess");
+
+consultForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("consultName").value.trim();
+  const phone = document.getElementById("consultPhone").value.trim();
+  const message = document.getElementById("consultMessage").value.trim();
+  if (!name || !phone || !message) return;
+
+  try {
+    await addDoc(collection(db, "consultations"), {
+      name,
+      phone,
+      message,
+      createdAt: Date.now(),
+      status: "신규",
+    });
+
+    consultForm.reset();
+    consultForm.classList.add("hidden");
+    consultSuccess.classList.remove("hidden");
+  } catch (err) {
+    alert("상담 신청에 실패했습니다. 잠시 후 다시 시도해주세요.");
+    console.error("Consultation submission error:", err);
+  }
+});
