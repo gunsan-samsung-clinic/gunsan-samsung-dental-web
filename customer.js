@@ -80,6 +80,7 @@ loadAftercare();
 
 const consultForm = document.getElementById("consultForm");
 const consultSuccess = document.getElementById("consultSuccess");
+const consultError = document.getElementById("consultError");
 
 consultForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -90,6 +91,8 @@ consultForm.addEventListener("submit", async (e) => {
   if (!name || !phone || !message) return;
 
   try {
+    document.getElementById("consultError").classList.add("hidden");
+
     await addDoc(collection(db, "consultations"), {
       name,
       phone,
@@ -102,7 +105,7 @@ consultForm.addEventListener("submit", async (e) => {
     consultForm.classList.add("hidden");
     consultSuccess.classList.remove("hidden");
   } catch (err) {
-    alert("상담 신청에 실패했습니다. 잠시 후 다시 시도해주세요.");
+    document.getElementById("consultError").classList.remove("hidden");
     console.error("Consultation submission error:", err);
   }
 });
