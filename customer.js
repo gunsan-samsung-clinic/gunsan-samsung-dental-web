@@ -83,6 +83,37 @@ async function loadAftercare() {
 loadBenefits();
 loadAftercare();
 
+/* ========== 후기 남기기 ========== */
+
+const reviewForm = document.getElementById("reviewForm");
+const reviewSuccess = document.getElementById("reviewSuccess");
+const reviewError = document.getElementById("reviewError");
+
+reviewForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const writer = document.getElementById("reviewWriter").value.trim();
+  const content = document.getElementById("reviewContent").value.trim();
+  if (!writer || !content) return;
+
+  try {
+    reviewError.classList.add("hidden");
+
+    await addDoc(collection(db, "reviews"), {
+      writer,
+      content,
+      status: "대기중",
+    });
+
+    reviewForm.reset();
+    reviewForm.classList.add("hidden");
+    reviewSuccess.classList.remove("hidden");
+  } catch (err) {
+    reviewError.classList.remove("hidden");
+    console.error("Review submission error:", err);
+  }
+});
+
 /* ========== 상담 신청 ========== */
 
 const consultForm = document.getElementById("consultForm");

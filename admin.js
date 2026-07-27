@@ -97,8 +97,9 @@ eventForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const title = document.getElementById("eventTitle").value.trim();
   const content = document.getElementById("eventContent").value.trim();
+  const imageUrl = document.getElementById("eventImageUrl").value.trim();
   if (!title || !content) return;
-  await addDoc(collection(db, "events"), { title, content });
+  await addDoc(collection(db, "events"), { title, content, imageUrl: imageUrl || null });
   eventForm.reset();
   loadEventsAdmin();
 });
@@ -109,9 +110,15 @@ async function loadEventsAdmin() {
     const snapshot = await getDocs(collection(db, "events"));
     snapshot.forEach((docSnap) => {
       const data = docSnap.data();
+      const thumb = data.imageUrl
+        ? `<img src="${escapeHtml(data.imageUrl)}" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">`
+        : "";
       eventAdminList.innerHTML += `
         <div class="list-item">
-          <div><h3>${escapeHtml(data.title)}</h3><p>${escapeHtml(data.content)}</p></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            ${thumb}
+            <div><h3>${escapeHtml(data.title)}</h3><p>${escapeHtml(data.content)}</p></div>
+          </div>
           <button class="btn-danger" data-id="${docSnap.id}" data-collection="events">삭제</button>
         </div>
       `;
@@ -166,7 +173,7 @@ reviewForm.addEventListener("submit", async (e) => {
   const writer = document.getElementById("reviewWriter").value.trim();
   const content = document.getElementById("reviewContent").value.trim();
   if (!writer || !content) return;
-  await addDoc(collection(db, "reviews"), { writer, content });
+  await addDoc(collection(db, "reviews"), { writer, content, status: "공개" });
   reviewForm.reset();
   loadReviewsAdmin();
 });
@@ -177,17 +184,32 @@ async function loadReviewsAdmin() {
     const snapshot = await getDocs(collection(db, "reviews"));
     snapshot.forEach((docSnap) => {
       const data = docSnap.data();
+      const isPending = data.status === "대기중";
       reviewAdminList.innerHTML += `
         <div class="list-item">
-          <div><strong>${escapeHtml(data.writer)}</strong><p>${escapeHtml(data.content)}</p></div>
-          <button class="btn-danger" data-id="${docSnap.id}" data-collection="reviews">삭제</button>
+          <div>
+            <span class="status-badge ${isPending ? "status-new" : "status-done"}">${isPending ? "대기중" : "공개"}</span>
+            <strong>${escapeHtml(data.writer)}</strong>
+            <p>${escapeHtml(data.content)}</p>
+          </div>
+          <div class="list-item-actions">
+            ${isPending ? `<button class="btn-check" data-id="${docSnap.id}">공개하기</button>` : ""}
+            <button class="btn-danger" data-id="${docSnap.id}" data-collection="reviews">삭제</button>
+          </div>
         </div>
       `;
     });
     reviewAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+    reviewAdminList.querySelectorAll(".btn-check").forEach((btn) => btn.addEventListener("click", handlePublishReview));
   } catch (err) {
     reviewAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
   }
+}
+
+async function handlePublishReview(e) {
+  const id = e.target.dataset.id;
+  await updateDoc(doc(db, "reviews", id), { status: "공개" });
+  loadReviewsAdmin();
 }
 
 /* ========== 혜택·쿠폰 ========== */

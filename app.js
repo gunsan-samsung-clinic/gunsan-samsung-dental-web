@@ -8,6 +8,12 @@ import {
 
 console.log("2026-삭제테스트");
 
+function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str ?? "";
+    return div.innerHTML;
+}
+
 
 /* =========================
    이벤트 목록
@@ -38,19 +44,21 @@ async function loadEvents(){
 
         console.log(data);
 
+        const imageTag = data.imageUrl
+            ? `<img src="${escapeHtml(data.imageUrl)}" class="event-image">`
+            : "";
+
         eventList.innerHTML += `
 
         <div class="event-card">
 
-            <img
-            src="event1.png"
-            class="event-image">
+            ${imageTag}
 
             <div class="event-text">
 
-                <h3>${data.title}</h3>
+                <h3>${escapeHtml(data.title)}</h3>
 
-                <p>${data.content}</p>
+                <p>${escapeHtml(data.content)}</p>
 
             </div>
 
@@ -84,9 +92,9 @@ async function loadNews(){
 
         <div class="content-item">
 
-            <h3>${data.title}</h3>
+            <h3>${escapeHtml(data.title)}</h3>
 
-            <p>${data.content}</p>
+            <p>${escapeHtml(data.content)}</p>
 
         </div>
 
@@ -116,13 +124,15 @@ async function loadReviews(){
 
         const data=doc.data();
 
+        if(data.status === "대기중") return;
+
         reviewList.innerHTML+=`
 
         <div class="content-item">
 
-            <strong>${data.writer}</strong>
+            <strong>${escapeHtml(data.writer)}</strong>
 
-            <p>${data.content}</p>
+            <p>${escapeHtml(data.content)}</p>
 
         </div>
 
