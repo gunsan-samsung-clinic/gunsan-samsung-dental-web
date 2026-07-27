@@ -20,7 +20,11 @@ async function loadReels() {
   try {
     const snapshot = await getDocs(collection(db, "reels"));
     const reels = [];
-    snapshot.forEach((docSnap) => reels.push(docSnap.data()));
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      if (data.active === false) return;
+      reels.push(data);
+    });
     reels.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
     if (reels.length === 0) return;

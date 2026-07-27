@@ -32,7 +32,9 @@ async function loadReels(){
     const reels = [];
 
     snapshot.forEach((doc)=>{
-        reels.push(doc.data());
+        const data = doc.data();
+        if(data.active === false) return;
+        reels.push(data);
     });
 
     reels.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));

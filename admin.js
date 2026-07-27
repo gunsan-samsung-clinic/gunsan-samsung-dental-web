@@ -142,10 +142,12 @@ reelForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const videoUrl = document.getElementById("reelVideoUrl").value.trim();
   const order = Number(document.getElementById("reelOrder").value) || 0;
+  const active = document.getElementById("reelActive").checked;
   if (!videoUrl) return;
 
-  await addDoc(collection(db, "reels"), { videoUrl, order });
+  await addDoc(collection(db, "reels"), { videoUrl, order, active });
   reelForm.reset();
+  document.getElementById("reelActive").checked = true;
   loadReelsAdmin();
 });
 
@@ -160,15 +162,26 @@ async function loadReelsAdmin() {
     items.forEach((data) => {
       reelAdminList.innerHTML += `
         <div class="list-item">
-          <div><h3>${escapeHtml(data.videoUrl)} (순서 ${data.order})</h3></div>
-          <button class="btn-danger" data-id="${data.id}" data-collection="reels">삭제</button>
+          <div><h3>${escapeHtml(data.videoUrl)} (순서 ${data.order}) ${data.active === false ? "(숨김)" : ""}</h3></div>
+          <div class="list-item-actions">
+            <button class="btn-toggle" data-id="${data.id}" data-active="${data.active !== false}">${data.active === false ? "보이기" : "숨기기"}</button>
+            <button class="btn-danger" data-id="${data.id}" data-collection="reels">삭제</button>
+          </div>
         </div>
       `;
     });
     reelAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+    reelAdminList.querySelectorAll(".btn-toggle").forEach((btn) => btn.addEventListener("click", handleToggleReelActive));
   } catch (err) {
     reelAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
   }
+}
+
+async function handleToggleReelActive(e) {
+  const id = e.target.dataset.id;
+  const nextActive = e.target.dataset.active !== "true";
+  await updateDoc(doc(db, "reels", id), { active: nextActive });
+  loadReelsAdmin();
 }
 
 /* ========== 공지사항 ========== */
