@@ -11,6 +11,45 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+/* ========== 이벤트 ========== */
+
+async function loadEvents() {
+  const eventList = document.getElementById("eventList");
+  eventList.innerHTML = "";
+
+  try {
+    const snapshot = await getDocs(collection(db, "events"));
+    const events = [];
+    snapshot.forEach((docSnap) => events.push(docSnap.data()));
+
+    // 이미지 있는 이벤트를 먼저, 글만 있는 이벤트를 그 아래에 보여준다
+    const withImage = events.filter((data) => data.imageUrl);
+    const textOnly = events.filter((data) => !data.imageUrl);
+
+    [...withImage, ...textOnly].forEach((data) => {
+      const imageTag = data.imageUrl
+        ? `<img src="${escapeHtml(data.imageUrl)}" class="event-image">`
+        : "";
+
+      eventList.innerHTML += `
+        <div class="event-card">
+          ${imageTag}
+          <div class="event-text">
+            <h3>${escapeHtml(data.title)}</h3>
+            <p>${escapeHtml(data.content)}</p>
+          </div>
+        </div>
+      `;
+    });
+
+    if (events.length === 0) {
+      eventList.innerHTML = "<p>현재 진행 중인 이벤트가 없습니다.</p>";
+    }
+  } catch (err) {
+    eventList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
+}
+
 /* ========== 혜택·쿠폰 ========== */
 
 async function loadBenefits() {
@@ -80,6 +119,7 @@ async function loadAftercare() {
   }
 }
 
+loadEvents();
 loadBenefits();
 loadAftercare();
 

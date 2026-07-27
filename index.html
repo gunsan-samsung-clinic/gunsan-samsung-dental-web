@@ -163,6 +163,13 @@ type="video/mp4">
 
 <div id="reviewList"></div>
 
+<form id="reviewForm" class="admin-form">
+  <input type="text" id="reviewWriter" placeholder="이름 (닉네임 가능)" required>
+  <textarea id="reviewContent" placeholder="이용 후기를 남겨주세요" required></textarea>
+  <button type="submit">후기 남기기</button>
+</form>
+<p id="reviewSuccess" class="success-text hidden">소중한 후기 감사합니다. 확인 후 게시됩니다.</p>
+<p id="reviewError" class="error-text hidden">후기 등록에 실패했습니다. 잠시 후 다시 시도해주세요.</p>
 
 </section>
 

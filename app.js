@@ -2,7 +2,8 @@ import { db } from "./firebase.js";
 
 import {
   collection,
-  getDocs
+  getDocs,
+  addDoc
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 
@@ -38,9 +39,17 @@ async function loadEvents(){
 
     console.log("이벤트 개수 :", snapshot.size);
 
-    snapshot.forEach((doc)=>{
+    const events = [];
 
-        const data = doc.data();
+    snapshot.forEach((doc)=>{
+        events.push(doc.data());
+    });
+
+    // 이미지 있는 이벤트를 먼저, 글만 있는 이벤트를 그 아래에 보여준다
+    const withImage = events.filter((data) => data.imageUrl);
+    const textOnly = events.filter((data) => !data.imageUrl);
+
+    [...withImage, ...textOnly].forEach((data) => {
 
         console.log(data);
 
@@ -147,6 +156,41 @@ loadEvents();
 loadNews();
 
 loadReviews();
+
+/* =========================
+   후기 남기기 (공개 홈페이지)
+========================= */
+
+const reviewForm = document.getElementById("reviewForm");
+const reviewSuccess = document.getElementById("reviewSuccess");
+const reviewError = document.getElementById("reviewError");
+
+if (reviewForm) {
+    reviewForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const writer = document.getElementById("reviewWriter").value.trim();
+        const content = document.getElementById("reviewContent").value.trim();
+        if (!writer || !content) return;
+
+        try {
+            reviewError.classList.add("hidden");
+
+            await addDoc(collection(db, "reviews"), {
+                writer,
+                content,
+                status: "대기중",
+            });
+
+            reviewForm.reset();
+            reviewForm.classList.add("hidden");
+            reviewSuccess.classList.remove("hidden");
+        } catch (err) {
+            reviewError.classList.remove("hidden");
+            console.error("Review submission error:", err);
+        }
+    });
+}
 
 
 
