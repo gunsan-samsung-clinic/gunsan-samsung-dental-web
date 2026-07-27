@@ -714,37 +714,59 @@ height:220px;
   cursor: pointer;
 }
 
-.customer-header {
-  text-align: center;
-  padding: 32px 16px;
-}
-
-.customer-header img {
-  max-width: 120px;
+.customer-intro p {
+  margin: 0;
+  color: #555;
+  line-height: 1.7;
 }
 
 .benefit-card {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 12px;
+  background: #eef5ff;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.benefit-card .pill {
+  display: inline-block;
+  background: #1565c0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.benefit-card h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  color: #222;
 }
 
 .accordion-item {
-  border-bottom: 1px solid #ddd;
+  background: #f8f9fb;
+  border-radius: 14px;
+  padding: 4px 18px;
+  margin-bottom: 10px;
 }
 
 .accordion-toggle {
   width: 100%;
   text-align: left;
-  padding: 12px 0;
+  padding: 14px 0;
   background: none;
   border: none;
   font-size: 16px;
+  font-weight: bold;
+  color: #1565c0;
   cursor: pointer;
 }
 
 .accordion-content {
-  padding: 0 0 12px;
+  padding: 0 0 16px;
+  color: #555;
+  line-height: 1.6;
 }
 
 .success-text {

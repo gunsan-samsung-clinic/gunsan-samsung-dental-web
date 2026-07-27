@@ -9,13 +9,21 @@
 </head>
 <body>
 
-<header class="customer-header">
-  <img src="clinic2.png" alt="군산 삼성치과">
-  <h1>찾아주셔서 감사합니다</h1>
-  <p>군산 삼성치과를 이용해주신 고객님을 위한 페이지입니다.</p>
+<header>
+  <div class="logo">
+    <img src="clinic2.png" alt="군산 삼성치과">
+    <div>
+      <h1>군산 삼성치과</h1>
+      <p>찾아주셔서 감사합니다</p>
+    </div>
+  </div>
 </header>
 
-<main>
+<div class="container">
+  <section class="content-card customer-intro">
+    <p>군산 삼성치과를 이용해주신 고객님만을 위한 페이지입니다. 진행 중인 혜택과 치료 후 관리 방법을 확인하고, 궁금하신 점은 언제든 상담을 신청해 주세요.</p>
+  </section>
+
   <section class="content-card">
     <h2>🎁 고객 전용 혜택</h2>
     <div id="benefitList"></div>
@@ -37,7 +45,7 @@
     <p id="consultSuccess" class="success-text hidden">접수되었습니다. 병원에서 연락드리겠습니다.</p>
     <p id="consultError" class="error-text hidden">상담 신청에 실패했습니다. 잠시 후 다시 시도해주세요.</p>
   </section>
-</main>
+</div>
 
 <script type="module" src="customer.js"></script>
 </body>

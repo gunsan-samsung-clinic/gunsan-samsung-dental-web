@@ -31,6 +31,7 @@ async function loadBenefits() {
       shown++;
       benefitList.innerHTML += `
         <div class="benefit-card">
+          <span class="pill">진행중</span>
           <h3>${escapeHtml(data.title)}</h3>
           <p>${escapeHtml(data.description)}</p>
           <span class="benefit-period">${data.startDate} ~ ${data.endDate}</span>
