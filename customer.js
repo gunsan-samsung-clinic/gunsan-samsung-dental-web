@@ -119,9 +119,41 @@ async function loadAftercare() {
   }
 }
 
+/* ========== 질의문답 ========== */
+
+async function loadQuestions() {
+  const questionList = document.getElementById("questionList");
+  questionList.innerHTML = "";
+
+  try {
+    const snapshot = await getDocs(collection(db, "questions"));
+    let shown = 0;
+
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      if (data.status !== "답변완료") return;
+
+      shown++;
+      questionList.innerHTML += `
+        <div class="content-item">
+          <p><strong>Q.</strong> ${escapeHtml(data.question)}</p>
+          <p><strong>A.</strong> ${escapeHtml(data.answer)}</p>
+        </div>
+      `;
+    });
+
+    if (shown === 0) {
+      questionList.innerHTML = "<p>등록된 질의문답이 없습니다.</p>";
+    }
+  } catch (err) {
+    questionList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
+}
+
 loadEvents();
 loadBenefits();
 loadAftercare();
+loadQuestions();
 
 /* ========== 후기 남기기 ========== */
 
@@ -151,6 +183,35 @@ reviewForm.addEventListener("submit", async (e) => {
   } catch (err) {
     reviewError.classList.remove("hidden");
     console.error("Review submission error:", err);
+  }
+});
+
+/* ========== 질문 남기기 ========== */
+
+const questionForm = document.getElementById("questionForm");
+const questionSuccess = document.getElementById("questionSuccess");
+const questionError = document.getElementById("questionError");
+
+questionForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const question = document.getElementById("questionText").value.trim();
+  if (!question) return;
+
+  try {
+    questionError.classList.add("hidden");
+
+    await addDoc(collection(db, "questions"), {
+      question,
+      status: "대기중",
+    });
+
+    questionForm.reset();
+    questionForm.classList.add("hidden");
+    questionSuccess.classList.remove("hidden");
+  } catch (err) {
+    questionError.classList.remove("hidden");
+    console.error("Question submission error:", err);
   }
 });
 

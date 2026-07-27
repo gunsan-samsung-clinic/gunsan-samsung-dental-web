@@ -52,6 +52,7 @@ onAuthStateChanged(auth, (user) => {
     loadBenefitsAdmin();
     loadAftercareAdmin();
     loadConsultationsAdmin();
+    loadQuestionsAdmin();
   } else {
     loginSection.classList.remove("hidden");
     adminSection.classList.add("hidden");
@@ -78,6 +79,7 @@ function reloadTab(col) {
   if (col === "benefits") loadBenefitsAdmin();
   if (col === "aftercare") loadAftercareAdmin();
   if (col === "consultations") loadConsultationsAdmin();
+  if (col === "questions") loadQuestionsAdmin();
 }
 
 async function handleDeleteClick(e) {
@@ -345,4 +347,46 @@ async function handleMarkChecked(e) {
   const id = e.target.dataset.id;
   await updateDoc(doc(db, "consultations", id), { status: "확인완료" });
   loadConsultationsAdmin();
+}
+
+/* ========== 질의문답 ========== */
+
+const questionAdminList = document.getElementById("questionAdminList");
+
+async function loadQuestionsAdmin() {
+  questionAdminList.innerHTML = "";
+  try {
+    const snapshot = await getDocs(collection(db, "questions"));
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const isAnswered = data.status === "답변완료";
+      questionAdminList.innerHTML += `
+        <div class="list-item">
+          <div style="flex:1;">
+            <span class="status-badge ${isAnswered ? "status-done" : "status-new"}">${isAnswered ? "답변완료" : "대기중"}</span>
+            <p><strong>Q.</strong> ${escapeHtml(data.question)}</p>
+            ${isAnswered
+              ? `<p><strong>A.</strong> ${escapeHtml(data.answer)}</p>`
+              : `
+                <textarea id="answerInput-${docSnap.id}" placeholder="답변을 입력하세요"></textarea>
+                <button class="btn-check" data-id="${docSnap.id}">답변 등록</button>
+              `}
+          </div>
+          <button class="btn-danger" data-id="${docSnap.id}" data-collection="questions">삭제</button>
+        </div>
+      `;
+    });
+    questionAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+    questionAdminList.querySelectorAll(".btn-check").forEach((btn) => btn.addEventListener("click", handleAnswerSubmit));
+  } catch (err) {
+    questionAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
+}
+
+async function handleAnswerSubmit(e) {
+  const id = e.target.dataset.id;
+  const answer = document.getElementById(`answerInput-${id}`).value.trim();
+  if (!answer) return;
+  await updateDoc(doc(db, "questions", id), { answer, status: "답변완료" });
+  loadQuestionsAdmin();
 }

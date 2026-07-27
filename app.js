@@ -151,11 +151,50 @@ async function loadReviews(){
 
 }
 
+/* =========================
+   질의문답 목록
+========================= */
+
+async function loadQuestions(){
+
+    const questionList=document.getElementById("questionList");
+
+    if(!questionList) return;
+
+    questionList.innerHTML="";
+
+    const snapshot=
+    await getDocs(collection(db,"questions"));
+
+    snapshot.forEach((doc)=>{
+
+        const data=doc.data();
+
+        if(data.status !== "답변완료") return;
+
+        questionList.innerHTML+=`
+
+        <div class="content-item">
+
+            <p><strong>Q.</strong> ${escapeHtml(data.question)}</p>
+
+            <p><strong>A.</strong> ${escapeHtml(data.answer)}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
 loadEvents();
 
 loadNews();
 
 loadReviews();
+
+loadQuestions();
 
 /* =========================
    후기 남기기 (공개 홈페이지)
@@ -188,6 +227,39 @@ if (reviewForm) {
         } catch (err) {
             reviewError.classList.remove("hidden");
             console.error("Review submission error:", err);
+        }
+    });
+}
+
+/* =========================
+   질문 남기기 (공개 홈페이지)
+========================= */
+
+const questionForm = document.getElementById("questionForm");
+const questionSuccess = document.getElementById("questionSuccess");
+const questionError = document.getElementById("questionError");
+
+if (questionForm) {
+    questionForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const question = document.getElementById("questionText").value.trim();
+        if (!question) return;
+
+        try {
+            questionError.classList.add("hidden");
+
+            await addDoc(collection(db, "questions"), {
+                question,
+                status: "대기중",
+            });
+
+            questionForm.reset();
+            questionForm.classList.add("hidden");
+            questionSuccess.classList.remove("hidden");
+        } catch (err) {
+            questionError.classList.remove("hidden");
+            console.error("Question submission error:", err);
         }
     });
 }
