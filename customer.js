@@ -11,6 +11,38 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+/* ========== 릴스 (여러 영상 자동 재생) ========== */
+
+async function loadReels() {
+  const reelPlayer = document.getElementById("reelPlayer");
+  if (!reelPlayer) return;
+
+  try {
+    const snapshot = await getDocs(collection(db, "reels"));
+    const reels = [];
+    snapshot.forEach((docSnap) => reels.push(docSnap.data()));
+    reels.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+    if (reels.length === 0) return;
+
+    let index = 0;
+
+    function playCurrent() {
+      reelPlayer.src = reels[index].videoUrl;
+      reelPlayer.play();
+    }
+
+    reelPlayer.addEventListener("ended", () => {
+      index = (index + 1) % reels.length;
+      playCurrent();
+    });
+
+    playCurrent();
+  } catch (err) {
+    // 릴스를 못 불러와도 나머지 페이지는 정상 동작해야 하므로 조용히 무시한다
+  }
+}
+
 /* ========== 이벤트 ========== */
 
 async function loadEvents() {
@@ -150,6 +182,7 @@ async function loadQuestions() {
   }
 }
 
+loadReels();
 loadEvents();
 loadBenefits();
 loadAftercare();

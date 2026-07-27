@@ -47,6 +47,7 @@ onAuthStateChanged(auth, (user) => {
     loginSection.classList.add("hidden");
     adminSection.classList.remove("hidden");
     loadEventsAdmin();
+    loadReelsAdmin();
     loadNewsAdmin();
     loadReviewsAdmin();
     loadBenefitsAdmin();
@@ -74,6 +75,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 
 function reloadTab(col) {
   if (col === "events") loadEventsAdmin();
+  if (col === "reels") loadReelsAdmin();
   if (col === "news") loadNewsAdmin();
   if (col === "reviews") loadReviewsAdmin();
   if (col === "benefits") loadBenefitsAdmin();
@@ -128,6 +130,44 @@ async function loadEventsAdmin() {
     eventAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
   } catch (err) {
     eventAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
+  }
+}
+
+/* ========== 릴스 ========== */
+
+const reelForm = document.getElementById("reelForm");
+const reelAdminList = document.getElementById("reelAdminList");
+
+reelForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const videoUrl = document.getElementById("reelVideoUrl").value.trim();
+  const order = Number(document.getElementById("reelOrder").value) || 0;
+  if (!videoUrl) return;
+
+  await addDoc(collection(db, "reels"), { videoUrl, order });
+  reelForm.reset();
+  loadReelsAdmin();
+});
+
+async function loadReelsAdmin() {
+  reelAdminList.innerHTML = "";
+  try {
+    const snapshot = await getDocs(collection(db, "reels"));
+    const items = [];
+    snapshot.forEach((docSnap) => items.push({ id: docSnap.id, ...docSnap.data() }));
+    items.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+    items.forEach((data) => {
+      reelAdminList.innerHTML += `
+        <div class="list-item">
+          <div><h3>${escapeHtml(data.videoUrl)} (순서 ${data.order})</h3></div>
+          <button class="btn-danger" data-id="${data.id}" data-collection="reels">삭제</button>
+        </div>
+      `;
+    });
+    reelAdminList.querySelectorAll(".btn-danger").forEach((btn) => btn.addEventListener("click", handleDeleteClick));
+  } catch (err) {
+    reelAdminList.innerHTML = "<p>정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>";
   }
 }
 

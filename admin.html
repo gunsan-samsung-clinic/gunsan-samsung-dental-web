@@ -24,6 +24,7 @@
 
   <nav class="admin-tabs">
     <button class="tab-btn active" data-tab="events">이벤트</button>
+    <button class="tab-btn" data-tab="reels">릴스</button>
     <button class="tab-btn" data-tab="news">공지사항</button>
     <button class="tab-btn" data-tab="reviews">후기</button>
     <button class="tab-btn" data-tab="benefits">혜택·쿠폰</button>
@@ -41,6 +42,16 @@
       <button type="submit">이벤트 추가</button>
     </form>
     <div id="eventAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-reels" class="tab-panel hidden">
+    <h2>릴스 관리</h2>
+    <form id="reelForm" class="admin-form">
+      <input type="text" id="reelVideoUrl" placeholder="영상 파일명 (예: reel1.mp4)" required>
+      <input type="number" id="reelOrder" placeholder="재생 순서 (숫자, 작을수록 먼저)" value="0">
+      <button type="submit">릴스 추가</button>
+    </form>
+    <div id="reelAdminList" class="admin-list"></div>
   </section>
 
   <section id="tab-news" class="tab-panel hidden">

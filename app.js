@@ -17,6 +17,45 @@ function escapeHtml(str) {
 
 
 /* =========================
+   릴스 (여러 영상 자동 재생)
+========================= */
+
+async function loadReels(){
+
+    const reelPlayer = document.getElementById("reelPlayer");
+
+    if(!reelPlayer) return;
+
+    const snapshot =
+    await getDocs(collection(db,"reels"));
+
+    const reels = [];
+
+    snapshot.forEach((doc)=>{
+        reels.push(doc.data());
+    });
+
+    reels.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+    if(reels.length === 0) return;
+
+    let index = 0;
+
+    function playCurrent(){
+        reelPlayer.src = reels[index].videoUrl;
+        reelPlayer.play();
+    }
+
+    reelPlayer.addEventListener("ended", () => {
+        index = (index + 1) % reels.length;
+        playCurrent();
+    });
+
+    playCurrent();
+
+}
+
+/* =========================
    이벤트 목록
 ========================= */
 
@@ -187,6 +226,8 @@ async function loadQuestions(){
     });
 
 }
+
+loadReels();
 
 loadEvents();
 
