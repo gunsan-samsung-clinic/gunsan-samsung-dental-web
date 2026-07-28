@@ -608,8 +608,50 @@ height:220px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid #ddd;
+  padding: 14px 20px;
+  background: #10265e;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+}
+
+.admin-header-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.admin-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffb020;
+  color: #10265e;
+  font-weight: bold;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.admin-header #logoutBtn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: normal;
+  cursor: pointer;
 }
 
 .admin-tabs {
@@ -684,15 +726,26 @@ height:220px;
 }
 
 .tab-panel {
-  padding: 0 24px 40px;
+  padding: 20px 20px 40px;
+  background: #f5f7fb;
+}
+
+.tab-panel h2 {
+  font-size: 16px;
+  color: #444;
+  margin: 0 0 16px;
 }
 
 .admin-form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   max-width: 480px;
   margin-bottom: 24px;
+  background: #fff;
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
 }
 
 .admin-form input,
@@ -718,15 +771,19 @@ height:220px;
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
-  padding: 12px;
-  border: 1px solid #ddd;
+  padding: 16px;
+  border: none;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
 }
 
 .btn-danger {
   background: #c0392b;
   color: #fff;
   border: none;
-  padding: 6px 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -737,9 +794,10 @@ height:220px;
 }
 
 .btn-toggle {
-  background: #f5f5f5;
-  border: 1px solid #ccc;
-  padding: 6px 12px;
+  background: #f0f2f5;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -770,7 +828,8 @@ height:220px;
   background: #2c7be5;
   color: #fff;
   border: none;
-  padding: 6px 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
