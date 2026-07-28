@@ -19,34 +19,44 @@
   </div>
 </header>
 
+<nav class="section-nav">
+  <a href="#sec-benefits" class="section-nav-btn"><span class="tab-icon">🏷️</span><span class="tab-label">혜택</span></a>
+  <a href="#sec-reels" class="section-nav-btn"><span class="tab-icon">🎬</span><span class="tab-label">릴스</span></a>
+  <a href="#sec-events" class="section-nav-btn"><span class="tab-icon">🎁</span><span class="tab-label">이벤트</span></a>
+  <a href="#sec-aftercare" class="section-nav-btn"><span class="tab-icon">🦷</span><span class="tab-label">사후관리</span></a>
+  <a href="#sec-questions" class="section-nav-btn"><span class="tab-icon">❓</span><span class="tab-label">질의문답</span></a>
+  <a href="#sec-reviews" class="section-nav-btn"><span class="tab-icon">⭐</span><span class="tab-label">후기</span></a>
+  <a href="#sec-consult" class="section-nav-btn"><span class="tab-icon">💬</span><span class="tab-label">상담신청</span></a>
+</nav>
+
 <div class="container">
   <section class="content-card customer-intro">
     <p>군산 삼성치과를 이용해주신 고객님만을 위한 페이지입니다. 진행 중인 혜택과 치료 후 관리 방법을 확인하고, 궁금하신 점은 언제든 상담을 신청해 주세요.</p>
   </section>
 
-  <section class="content-card">
+  <section class="content-card" id="sec-benefits">
     <h2>🎁 고객 전용 혜택</h2>
     <div id="benefitList"></div>
   </section>
 
-  <section class="content-card">
+  <section class="content-card" id="sec-reels">
     <h2>🎬 릴스</h2>
     <div class="hero-video">
       <video id="reelPlayer" autoplay muted playsinline></video>
     </div>
   </section>
 
-  <section class="content-card">
+  <section class="content-card" id="sec-events">
     <h2>🎁 이벤트</h2>
     <div id="eventList"></div>
   </section>
 
-  <section class="content-card">
+  <section class="content-card" id="sec-aftercare">
     <h2>🦷 치료 후 관리 안내</h2>
     <div id="aftercareList"></div>
   </section>
 
-  <section class="content-card">
+  <section class="content-card" id="sec-questions">
     <h2>❓ 질의문답</h2>
     <div id="questionList"></div>
     <form id="questionForm" class="admin-form">
@@ -57,7 +67,7 @@
     <p id="questionError" class="error-text hidden">질문 등록에 실패했습니다. 잠시 후 다시 시도해주세요.</p>
   </section>
 
-  <section class="content-card">
+  <section class="content-card" id="sec-reviews">
     <h2>⭐ 후기 남기기</h2>
     <form id="reviewForm" class="admin-form">
       <input type="text" id="reviewWriter" placeholder="이름 (닉네임 가능)" required>
@@ -68,7 +78,7 @@
     <p id="reviewError" class="error-text hidden">후기 등록에 실패했습니다. 잠시 후 다시 시도해주세요.</p>
   </section>
 
-  <section class="content-card">
+  <section class="content-card" id="sec-consult">
     <h2>💬 상담 신청</h2>
     <form id="consultForm" class="admin-form">
       <input type="text" id="consultName" placeholder="이름" required>
