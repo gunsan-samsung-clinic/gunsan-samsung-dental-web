@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>군산 삼성치과 - 고객 전용</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="clinic2.png" alt="군산 삼성치과">
+    <div>
+      <h1>군산 삼성치과</h1>
+      <p>찾아주셔서 감사합니다</p>
+    </div>
+  </div>
+</header>
+
+<nav class="section-nav">
+  <a href="#sec-benefits" class="section-nav-btn"><span class="tab-icon">🏷️</span><span class="tab-label">혜택</span></a>
+  <a href="#sec-reels" class="section-nav-btn"><span class="tab-icon">🎬</span><span class="tab-label">릴스</span></a>
+  <a href="#sec-events" class="section-nav-btn"><span class="tab-icon">🎁</span><span class="tab-label">이벤트</span></a>
+  <a href="#sec-aftercare" class="section-nav-btn"><span class="tab-icon">🦷</span><span class="tab-label">사후관리</span></a>
+  <a href="#sec-questions" class="section-nav-btn"><span class="tab-icon">❓</span><span class="tab-label">질의문답</span></a>
+  <a href="#sec-reviews" class="section-nav-btn"><span class="tab-icon">⭐</span><span class="tab-label">후기</span></a>
+  <a href="#sec-consult" class="section-nav-btn"><span class="tab-icon">💬</span><span class="tab-label">상담신청</span></a>
+</nav>
+
+<div class="container">
+  <section class="content-card customer-intro">
+    <p>군산 삼성치과를 이용해주신 고객님만을 위한 페이지입니다. 진행 중인 혜택과 치료 후 관리 방법을 확인하고, 궁금하신 점은 언제든 상담을 신청해 주세요.</p>
+  </section>
+
+  <section class="content-card" id="sec-benefits">
+    <h2>🎁 고객 전용 혜택</h2>
+    <div id="benefitList"></div>
+  </section>
+
+  <section class="content-card" id="sec-reels">
+    <h2>🎬 릴스</h2>
+    <div class="hero-video">
+      <video id="reelPlayer" autoplay muted playsinline></video>
+    </div>
+  </section>
+
+  <section class="content-card" id="sec-events">
+    <h2>🎁 이벤트</h2>
+    <div id="eventList"></div>
+  </section>
+
+  <section class="content-card" id="sec-aftercare">
+    <h2>🦷 치료 후 관리 안내</h2>
+    <div id="aftercareList"></div>
+  </section>
+
+  <section class="content-card" id="sec-questions">
+    <h2>❓ 질의문답</h2>
+    <div id="questionList"></div>
+    <form id="questionForm" class="admin-form">
+      <textarea id="questionText" placeholder="궁금하신 점을 남겨주세요" required></textarea>
+      <button type="submit">질문 남기기</button>
+    </form>
+    <p id="questionSuccess" class="success-text hidden">질문이 접수되었습니다. 답변 후 게시됩니다.</p>
+    <p id="questionError" class="error-text hidden">질문 등록에 실패했습니다. 잠시 후 다시 시도해주세요.</p>
+  </section>
+
+  <section class="content-card" id="sec-reviews">
+    <h2>⭐ 후기 남기기</h2>
+    <form id="reviewForm" class="admin-form">
+      <input type="text" id="reviewWriter" placeholder="이름 (닉네임 가능)" required>
+      <textarea id="reviewContent" placeholder="이용 후기를 남겨주세요" required></textarea>
+      <button type="submit">후기 남기기</button>
+    </form>
+    <p id="reviewSuccess" class="success-text hidden">소중한 후기 감사합니다. 확인 후 홈페이지에 게시됩니다.</p>
+    <p id="reviewError" class="error-text hidden">후기 등록에 실패했습니다. 잠시 후 다시 시도해주세요.</p>
+  </section>
+
+  <section class="content-card" id="sec-consult">
+    <h2>💬 상담 신청</h2>
+    <form id="consultForm" class="admin-form">
+      <input type="text" id="consultName" placeholder="이름" required>
+      <input type="tel" id="consultPhone" placeholder="연락처" required>
+      <textarea id="consultMessage" placeholder="문의 내용" required></textarea>
+      <button type="submit">상담 신청하기</button>
+    </form>
+    <p id="consultSuccess" class="success-text hidden">접수되었습니다. 병원에서 연락드리겠습니다.</p>
+    <p id="consultError" class="error-text hidden">상담 신청에 실패했습니다. 잠시 후 다시 시도해주세요.</p>
+  </section>
+</div>
+
+<a href="https://pf.kakao.com/_xicixfX/chat" target="_blank" rel="noopener" class="kakao-float" aria-label="카카오톡 상담하기">💬</a>
+
+<script type="module" src="customer.js"></script>
+</body>
+</html>

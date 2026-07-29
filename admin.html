@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>군산 삼성치과 - 관리자</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginSection">
+  <h1>관리자 로그인</h1>
+  <input type="email" id="loginEmail" placeholder="이메일">
+  <input type="password" id="loginPassword" placeholder="비밀번호">
+  <button id="loginBtn">로그인</button>
+  <p id="loginError" class="error-text"></p>
+</div>
+
+<div id="adminSection" class="hidden">
+  <header class="admin-header">
+    <div class="admin-header-identity">
+      <span class="admin-avatar">군</span>
+      <h1>군산 삼성치과 관리자</h1>
+    </div>
+    <button id="logoutBtn">로그아웃</button>
+  </header>
+
+  <nav class="admin-tabs">
+    <button class="tab-btn active" data-tab="events">
+      <span class="tab-icon">🎁</span>
+      <span class="tab-label">이벤트</span>
+    </button>
+    <button class="tab-btn" data-tab="reels">
+      <span class="tab-icon">🎬</span>
+      <span class="tab-label">릴스</span>
+    </button>
+    <button class="tab-btn" data-tab="news">
+      <span class="tab-icon">📢</span>
+      <span class="tab-label">공지사항</span>
+    </button>
+    <button class="tab-btn" data-tab="reviews">
+      <span class="tab-icon">⭐</span>
+      <span class="tab-label">후기</span>
+    </button>
+    <button class="tab-btn" data-tab="benefits">
+      <span class="tab-icon">🏷️</span>
+      <span class="tab-label">혜택·쿠폰</span>
+    </button>
+    <button class="tab-btn" data-tab="aftercare">
+      <span class="tab-icon">🦷</span>
+      <span class="tab-label">사후관리</span>
+    </button>
+    <button class="tab-btn" data-tab="consultations">
+      <span class="tab-icon">💬</span>
+      <span class="tab-label">상담 신청함</span>
+    </button>
+    <button class="tab-btn" data-tab="questions">
+      <span class="tab-icon">❓</span>
+      <span class="tab-label">질의문답</span>
+    </button>
+  </nav>
+
+  <section id="tab-events" class="tab-panel">
+    <h2>이벤트 관리</h2>
+    <form id="eventForm" class="admin-form">
+      <input type="text" id="eventTitle" placeholder="이벤트 제목" required>
+      <textarea id="eventContent" placeholder="이벤트 내용" required></textarea>
+      <input type="text" id="eventImageUrl" placeholder="이미지 파일명 (선택, 비워두면 글만 표시)">
+      <button type="submit">이벤트 추가</button>
+    </form>
+    <div id="eventAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-reels" class="tab-panel hidden">
+    <h2>릴스 관리</h2>
+    <form id="reelForm" class="admin-form">
+      <input type="text" id="reelVideoUrl" placeholder="영상 파일명 (예: reel1.mp4)" required>
+      <input type="number" id="reelOrder" placeholder="재생 순서 (숫자, 작을수록 먼저)" value="0">
+      <label><input type="checkbox" id="reelActive" checked> 홈페이지에 보이기</label>
+      <button type="submit">릴스 추가</button>
+    </form>
+    <div id="reelAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-news" class="tab-panel hidden">
+    <h2>공지사항 관리</h2>
+    <form id="newsForm" class="admin-form">
+      <input type="text" id="newsTitle" placeholder="공지 제목" required>
+      <textarea id="newsContent" placeholder="공지 내용" required></textarea>
+      <button type="submit">공지 추가</button>
+    </form>
+    <div id="newsAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-reviews" class="tab-panel hidden">
+    <h2>후기 관리</h2>
+    <form id="reviewForm" class="admin-form">
+      <input type="text" id="reviewWriter" placeholder="작성자" required>
+      <textarea id="reviewContent" placeholder="후기 내용" required></textarea>
+      <button type="submit">후기 추가</button>
+    </form>
+    <div id="reviewAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-benefits" class="tab-panel hidden">
+    <h2>혜택·쿠폰 관리</h2>
+    <form id="benefitForm" class="admin-form">
+      <input type="text" id="benefitTitle" placeholder="혜택 제목" required>
+      <textarea id="benefitDescription" placeholder="혜택 설명" required></textarea>
+      <label>시작일 <input type="date" id="benefitStart" required></label>
+      <label>종료일 <input type="date" id="benefitEnd" required></label>
+      <label><input type="checkbox" id="benefitActive" checked> 고객 페이지에 보이기</label>
+      <button type="submit">혜택 추가</button>
+    </form>
+    <div id="benefitAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-aftercare" class="tab-panel hidden">
+    <h2>사후관리 안내 관리</h2>
+    <form id="aftercareForm" class="admin-form">
+      <input type="text" id="aftercareProcedure" placeholder="시술명 (예: 임플란트)" required>
+      <textarea id="aftercareContent" placeholder="관리 안내 내용" required></textarea>
+      <input type="number" id="aftercareOrder" placeholder="표시 순서 (숫자, 작을수록 먼저)" value="0">
+      <button type="submit">안내 추가</button>
+    </form>
+    <div id="aftercareAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-consultations" class="tab-panel hidden">
+    <h2>상담 신청함</h2>
+    <div id="consultationAdminList" class="admin-list"></div>
+  </section>
+
+  <section id="tab-questions" class="tab-panel hidden">
+    <h2>질의문답 관리</h2>
+    <div id="questionAdminList" class="admin-list"></div>
+  </section>
+
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
